@@ -1,0 +1,27 @@
+services:
+    syseleven.validator.record:
+        class: SysEleven\PowerDnsBundle\Validator\Constraints\RecordValidator
+        arguments: [@doctrine.orm.default_entity_manager]
+        tags:
+            - {name: validator.constraint_validator, alias: syseleven_validator_record}
+
+
+    syseleven.pdns.workflow.domains:
+            class: SysEleven\PowerDnsBundle\Lib\DomainWorkflow
+            calls:
+                - [setContainer,[@service_container]]
+
+
+    syseleven.pdns.workflow.records:
+        class: SysEleven\PowerDnsBundle\Lib\RecordWorkflow
+        calls:
+            - [setContainer,[@service_container]]
+
+    # custom logger for record and domain updates
+    syseleven.event_listener.logger:
+        class: SysEleven\PowerDnsBundle\EventListener\UsernameListener
+        arguments: [@?service_container]
+        tags:
+            - {name: kernel.event_subscriber}
+
+

@@ -1,0 +1,19 @@
+syseleven_powerdns_domains_api:
+    resource: "@SysElevenPowerDnsBundle/Controller/ApiDomainsController.php"
+    type:     annotation
+    prefix:   /api
+
+syseleven_powerdns_search_api:
+    resource: "@SysElevenPowerDnsBundle/Controller/ApiSearchController.php"
+    type:     annotation
+    prefix:   /api
+
+syseleven_powerdns_domains_records_api:
+    resource: "@SysElevenPowerDnsBundle/Controller/ApiRecordsController.php"
+    type:     annotation
+    prefix:   /api
+
+syseleven_powerdns_domains_soa_api:
+    resource: "@SysElevenPowerDnsBundle/Controller/ApiSoaController.php"
+    type:     annotation
+    prefix:   /api
