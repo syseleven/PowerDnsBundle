@@ -7,7 +7,7 @@
  * @subpackage subpackage
  */
 
-namespace Syseleven\PowerDns\LibraryBundle\Lib;
+namespace SysEleven\PowerDnsBundle\Lib;
 
  
 /**

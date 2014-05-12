@@ -21,7 +21,7 @@ class ApiDomainsControllerTest extends WebTestCase
     public function testIndex()
     {
         $client = static::createClient();
-        $client->request('GET', '/powerdns/api/domains.json',array('name' => 'foo.de'));
+        $client->request('GET', '/api/domains.json',array('name' => 'foo.de'));
 
         $cnt = $client->getResponse()->getContent();
 
@@ -32,7 +32,7 @@ class ApiDomainsControllerTest extends WebTestCase
         $this->assertEquals('success', $cnt['status']);
         $this->assertCount(1, $cnt['data']);
 
-        $client->request('GET', '/powerdns/api/domains.json',array('search' => 'foo'));
+        $client->request('GET', '/api/domains.json',array('search' => 'foo'));
 
         $cnt = $client->getResponse()->getContent();
 
@@ -43,7 +43,7 @@ class ApiDomainsControllerTest extends WebTestCase
         $this->assertEquals('success', $cnt['status']);
         $this->assertCount(2, $cnt['data']);
 
-        $client->request('GET', '/powerdns/api/domains.json',array('type' => array('MASTER')));
+        $client->request('GET', '/api/domains.json',array('type' => array('MASTER')));
 
         $cnt = $client->getResponse()->getContent();
 
@@ -62,7 +62,7 @@ class ApiDomainsControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('POST', '/powerdns/api/domains.json',array('name' => 'domain.de','type' => 'NATIVE'));
+        $client->request('POST', '/api/domains.json',array('name' => 'domain.de','type' => 'NATIVE'));
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -78,7 +78,7 @@ class ApiDomainsControllerTest extends WebTestCase
         $this->assertEquals('domain.de',$data['name']);
         $this->assertEquals('NATIVE',$data['type']);
 
-        $client->request('POST', '/powerdns/api/domains.json',array('name' => 'domain.de','type' => 'BOGUS'));
+        $client->request('POST', '/api/domains.json',array('name' => 'domain.de','type' => 'BOGUS'));
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
 
@@ -94,7 +94,7 @@ class ApiDomainsControllerTest extends WebTestCase
         $this->assertEquals('Type not supported', $errors['type']);
 
 
-        $client->request('POST', '/powerdns/api/domains.json',array('name' => 'd','type' => 'BOGUS'));
+        $client->request('POST', '/api/domains.json',array('name' => 'd','type' => 'BOGUS'));
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
 
@@ -121,7 +121,7 @@ class ApiDomainsControllerTest extends WebTestCase
             .md5('verylongname')
             .md5('verylongname');
 
-        $client->request('POST', '/powerdns/api/domains.json',array('name' => $name,'type' => 'BOGUS'));
+        $client->request('POST', '/api/domains.json',array('name' => $name,'type' => 'BOGUS'));
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
 
@@ -147,7 +147,7 @@ class ApiDomainsControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('GET', '/powerdns/api/domains/'.$id.'.json');
+        $client->request('GET', '/api/domains/'.$id.'.json');
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -158,7 +158,7 @@ class ApiDomainsControllerTest extends WebTestCase
 
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('GET', '/powerdns/api/domains/999999999.json');
+        $client->request('GET', '/api/domains/999999999.json');
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -180,7 +180,7 @@ class ApiDomainsControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('PUT', '/powerdns/api/domains/9999999.json', array('name' => 'domain2.de','type' => 'BOGUS'));
+        $client->request('PUT', '/api/domains/9999999.json', array('name' => 'domain2.de','type' => 'BOGUS'));
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -191,7 +191,7 @@ class ApiDomainsControllerTest extends WebTestCase
 
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('PUT', '/powerdns/api/domains/'.$id.'.json', array('name' => 'domain2.de','type' => 'NATIVE'));
+        $client->request('PUT', '/api/domains/'.$id.'.json', array('name' => 'domain2.de','type' => 'NATIVE'));
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -206,7 +206,7 @@ class ApiDomainsControllerTest extends WebTestCase
 
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('PUT', '/powerdns/api/domains/'.$id.'.json', array('name' => 'domain2.de','type' => 'BOGUS'));
+        $client->request('PUT', '/api/domains/'.$id.'.json', array('name' => 'domain2.de','type' => 'BOGUS'));
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -217,7 +217,7 @@ class ApiDomainsControllerTest extends WebTestCase
 
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('PUT', '/powerdns/api/domains/'.$id.'.json', array('name' => 'domain.de','type' => 'NATIVE'));
+        $client->request('PUT', '/api/domains/'.$id.'.json', array('name' => 'domain.de','type' => 'NATIVE'));
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -241,7 +241,7 @@ class ApiDomainsControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('DELETE', '/powerdns/api/domains/9999999.json');
+        $client->request('DELETE', '/api/domains/9999999.json');
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -253,7 +253,7 @@ class ApiDomainsControllerTest extends WebTestCase
 
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('DELETE', '/powerdns/api/domains/'.$id.'.json');
+        $client->request('DELETE', '/api/domains/'.$id.'.json');
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -267,7 +267,7 @@ class ApiDomainsControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('GET', '/powerdns/api/domains/1/history.json');
+        $client->request('GET', '/api/domains/1/history.json');
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -278,7 +278,7 @@ class ApiDomainsControllerTest extends WebTestCase
 
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('GET', '/powerdns/api/domains/999999999/history.json');
+        $client->request('GET', '/api/domains/999999999/history.json');
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);

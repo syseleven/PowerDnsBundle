@@ -1,0 +1,43 @@
+{
+    "name": "SysEleven/PowerDnsBundle",
+    "type": "symfony-bundle",
+    "description": "This bundle provides (yet another) api for the PowerDns DNS server. It allows the creation and modification of zones and records in the server.",
+    "keywords": ["rest","powerdns","api","syseleven"],
+    "homepage": "https://github.com/syseleven",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Markus Seifert",
+            "email": "m.seifert@syseleven.de"
+        }
+    ],
+
+    "require": {
+        "php":                            ">=5.3.2",
+        "psr/log":                        "~1.0",
+        "symfony/framework-bundle":       "~2.2",
+        "symfony/security":               "~2.2",
+        "sensio/framework-extra-bundle":  "~2.2",
+        "symfony/form":                   "~2.2",
+        "symfony/validator":              "~2.2",
+        "symfony/serializer":             "~2.2",
+        "symfony/yaml":                   "~2.2",
+        "doctrine/orm":                   "~2.2,>=2.2.3",
+        "doctrine/doctrine-bundle":       "~1.2",
+        "jms/serializer-bundle":          "0.12.*",
+        "friendsofsymfony/rest-bundle":   "~1.4",
+        "zendframework/zend-validator":   "2.0.*"
+
+    },
+
+    "conflict": {
+        "jms/serializer": "<0.12",
+        "jms/serializer-bundle": "<0.11"
+    },
+
+    "autoload": {
+        "psr-0": { "SysEleven\\PowerDnsBundle": "" }
+    },
+
+    "target-dir": "SysEleven/PowerDnsBundle",
+}
