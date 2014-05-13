@@ -1,0 +1,8 @@
+syseleven_power_dns_api2_domains:
+    resource: "@SysElevenPowerDnsBundle/Resources/config/routing.yml"
+    prefix: /
+
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc

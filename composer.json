@@ -15,19 +15,26 @@
     "require": {
         "php":                            ">=5.3.2",
         "psr/log":                        "~1.0",
-        "symfony/framework-bundle":       "~2.2",
-        "symfony/security":               "~2.2",
-        "sensio/framework-extra-bundle":  "~2.2",
-        "symfony/form":                   "~2.2",
-        "symfony/validator":              "~2.2",
-        "symfony/serializer":             "~2.2",
-        "symfony/yaml":                   "~2.2",
+        "symfony/symfony":                "~2.4",
         "doctrine/orm":                   "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle":       "~1.2",
-        "jms/serializer-bundle":          "0.12.*",
-        "friendsofsymfony/rest-bundle":   "~1.4",
-        "zendframework/zend-validator":   "2.0.*"
+        "twig/extensions":                "~1.0",
+        "symfony/assetic-bundle":         "~2.3",
+        "symfony/swiftmailer-bundle":     "~2.3",
+        "symfony/monolog-bundle":         "~2.4",
+        "sensio/distribution-bundle":     "~2.3",
+        "sensio/framework-extra-bundle":  "~3.0",
+        "sensio/generator-bundle":        "~2.3",
+        "incenteev/composer-parameter-handler": "~2.0",
+        "friendsofsymfony/rest-bundle":    "*",
+        "zendframework/zend-validator":   "2.0.*",
+        "jms/serializer-bundle":          "*",
+        "nelmio/api-doc-bundle":          "@stable"
 
+    },
+    "require-dev": {
+        "doctrine/data-fixtures": "1.x",
+        "doctrine/doctrine-fixtures-bundle": "2.2.x"
     },
 
     "conflict": {
@@ -39,5 +46,5 @@
         "psr-0": { "SysEleven\\PowerDnsBundle": "" }
     },
 
-    "target-dir": "SysEleven/PowerDnsBundle",
+    "target-dir": "SysEleven/PowerDnsBundle"
 }

@@ -1,0 +1,56 @@
+imports:
+    - { resource: parameters.yml }
+
+framework:
+    secret:          "klakdlakdlsakdlsakliiinnnnn"
+    router:
+        resource: "%kernel.root_dir%/config/routing_test.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale:  "en"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        handler_id:  ~
+    fragments:       ~
+    http_method_override: true
+
+
+monolog:
+    handlers:
+        main:
+            type:  stream
+            path:  %kernel.logs_dir%/%kernel.environment%.log
+            level: debug
+        firephp:
+            type:  firephp
+            level: info
+
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+
+doctrine:
+    dbal:
+        driver:   "pdo_mysql"
+        host:     "127.0.0.1"
+        port:     "3306"
+        dbname:   "powerdns_test"
+        user:     "root"
+        password: ""
+        charset:  UTF8
+
+    orm:
+        default_entity_manager: default
+        entity_managers:
+            default:
+                connection: default
+                auto_mapping: true
+        auto_generate_proxy_classes: "%kernel.debug%"
+
+sys_eleven_power_dns:
+    entity_manager: default
