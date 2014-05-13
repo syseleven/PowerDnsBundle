@@ -3,3 +3,4 @@ app/config/parameters.yml
 composer.lock
 .idea/
 composer.phar
+phpunit.phar
