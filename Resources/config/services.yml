@@ -7,15 +7,20 @@ services:
 
 
     syseleven.pdns.workflow.domains:
-            class: SysEleven\PowerDnsBundle\Lib\DomainWorkflow
-            calls:
-                - [setContainer,[@service_container]]
+        class: SysEleven\PowerDnsBundle\Lib\DomainWorkflow
+        calls:
+            - [setContainer,[@service_container]]
+            - [setConnection, [%syseleven.pdns.entity_manager%]]
+
+
 
 
     syseleven.pdns.workflow.records:
         class: SysEleven\PowerDnsBundle\Lib\RecordWorkflow
         calls:
             - [setContainer,[@service_container]]
+            - [setConnection, [%syseleven.pdns.entity_manager%]]
+
 
     # custom logger for record and domain updates
     syseleven.event_listener.logger:

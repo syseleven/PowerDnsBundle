@@ -18,11 +18,12 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('syseleven_power_dns');
+        $rootNode = $treeBuilder->root('sys_eleven_power_dns');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode->children()
+                    ->scalarNode('entity_manager')->defaultValue('default')->end()
+                    ->scalarNode('result_wrapper')->defaultValue('\SysEleven\PowerDnsBundle\Lib\ResultWrapper')->end()
+                ->end();
 
         return $treeBuilder;
     }

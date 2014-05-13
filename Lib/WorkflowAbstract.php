@@ -51,6 +51,13 @@ abstract class WorkflowAbstract implements ContainerAwareInterface
      */
     protected $username;
 
+    /**
+     * Name of the entity manager to use
+     *
+     * @var string
+     */
+    protected $connectionName;
+
 
     /**
      * Searches in the backend and returns a query builder object
@@ -281,7 +288,7 @@ abstract class WorkflowAbstract implements ContainerAwareInterface
      */
     public function getDatabase()
     {
-        return $this->container->get('doctrine')->getManager();
+        return $this->container->get('doctrine')->getManager($this->getConnection());
     }
 
     /**
@@ -338,5 +345,17 @@ abstract class WorkflowAbstract implements ContainerAwareInterface
     public function getUsername()
     {
         return $this->username;
+    }
+
+    public function setConnection($name)
+    {
+        $this->connectionName = $name;
+
+        return $this;
+    }
+
+    public function getConnection()
+    {
+        return $this->connectionName;
     }
 }
