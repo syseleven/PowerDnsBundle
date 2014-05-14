@@ -1,5 +1,6 @@
 imports:
     - { resource: parameters.yml }
+    - { resource: security.yml }
 
 framework:
     secret:          "klakdlakdlsakdlsakliiinnnnn"
@@ -18,6 +19,7 @@ framework:
         handler_id:  ~
     fragments:       ~
     http_method_override: true
+    test: ~
 
 
 monolog:

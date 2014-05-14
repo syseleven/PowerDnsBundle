@@ -4,3 +4,4 @@ composer.lock
 .idea/
 composer.phar
 phpunit.phar
+phpdoc.phar

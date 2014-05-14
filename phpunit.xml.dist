@@ -1,7 +1,7 @@
 <phpunit
         backupGlobals               = "false"
         backupStaticAttributes      = "false"
-        colors                      = "true"
+        colors                      = "false"
         convertErrorsToExceptions   = "true"
         convertNoticesToExceptions  = "true"
         convertWarningsToExceptions = "true"
@@ -16,7 +16,7 @@
     </testsuites>
 
     <php>
-        <server name="KERNEL_DIR" value="./Tests/Functional/app/" />
+        <server name="KERNEL_DIR" value="./Tests/Functional/app" />
     </php>
 
     <filter>
@@ -36,6 +36,8 @@
         <env name="BOOTSTRAP_CLEAN_DATABASE_ENV" value="test"/>
         <env name="BOOTSTRAP_LOAD_FIXTURES_ENV" value="test"/>
         <env name="BOOTSTRAP_CLEAR_CACHE_ENV" value="test"/>
+        <const name="DB_USER" value="root"/>
+        <const name="DB_PASSWORD" value="root"/>
     </php>
 </phpunit>
 
