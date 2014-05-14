@@ -39,11 +39,11 @@ twig:
 doctrine:
     dbal:
         driver:   "pdo_mysql"
-        host:     "%db.host%"
+        host:     "127.0.0.1"
         port:     "3306"
-        dbname:   "%db.database%"
-        user:     "%db.user%"
-        password: "%db.password%"
+        dbname:   "powerdns_test"
+        user:     "root"
+        password: ""
         charset:  UTF8
 
     orm:

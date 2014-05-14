@@ -115,6 +115,8 @@ class RecordWorkflowTest extends WebTestCase
 
         $serial = $domainObj->getSerial();
 
+        sleep(4);
+
         $recordObj = new Records();
         $recordObj->setName('www.'.$domainObj->getName());
         $recordObj->setType('A');

@@ -44,7 +44,7 @@ class ApiSoaController extends ApiController
      * Returns the soa record of the given domain.
      *
      * @ApiDoc(
-     *      resource="true"
+     *      resource="true",
      *      description="Shows the details of the soa record of the given domain",
      *      requirements={
      *          {"name" = "domain", "dataType" = "integer", "requirement" = "\d+", "description" = "Id of the domain"},
