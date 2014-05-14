@@ -1,10 +1,14 @@
 <?php
 /**
- * Syseleven PowerDns API
+ * This file is part of the SysEleven PowerDnsBundle.
  *
- * @author Markus Seifert <m.seifert@syseleven.de>
- * @package syseleven_powerdns
- * @subpackage library
+ * (c) SysEleven GmbH <http://www.syseleven.de/>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @author  M. Seifert <m.seifert@syseleven.de>
+ * @package SysEleven\PowerDnsBundle\Entity
  */
 namespace SysEleven\PowerDnsBundle\Entity;
 
@@ -14,7 +18,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use SysEleven\PowerDnsBundle\Form\Transformer\SoaTransformer;
 use SysEleven\PowerDnsBundle\Lib\PowerDnsObjectInterface;
 use SysEleven\PowerDnsBundle\Validator\Constraints AS SyselevenAssert;
-use Gedmo\Mapping\Annotation as Gedmo;
 use SysEleven\PowerDnsBundle\Form\Transformer\PtrTransformer;
 use SysEleven\PowerDnsBundle\EventListener\RecordListener;
 
@@ -28,9 +31,9 @@ use SysEleven\PowerDnsBundle\EventListener\RecordListener;
  * @ORM\Entity(repositoryClass="SysEleven\PowerDnsBundle\Entity\RecordsRepository")
  * @ORM\EntityListeners({"SysEleven\PowerDnsBundle\EventListener\RecordListener"})
  *
- * @author Markus Seifert <m.seifert@syseleven.de>
- * @package syseleven_powerdns
- * @subpackage library
+ * @author  M. Seifert <m.seifert@syseleven.de>
+ * @package SysEleven\PowerDnsBundle\Entity
+ *
  * @Serializer\ExclusionPolicy("all")
  */
 class Records implements PowerDnsObjectInterface

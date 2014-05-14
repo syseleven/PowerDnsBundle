@@ -1,10 +1,14 @@
 <?php
 /**
- * Syseleven PowerDns API
+ * This file is part of the SysEleven PowerDnsBundle.
  *
- * @author Markus Seifert <m.seifert@syseleven.de>
- * @package syseleven_powerdns
- * @subpackage library
+ * (c) SysEleven GmbH <http://www.syseleven.de/>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @author  M. Seifert <m.seifert@syseleven.de>
+ * @package SysEleven\PowerDnsBundle\Entity
  */
 namespace SysEleven\PowerDnsBundle\Entity;
 
@@ -14,13 +18,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use JMS\Serializer\Annotation AS Serializer;
-use Gedmo\Mapping\Annotation as Gedmo;
 use SysEleven\PowerDnsBundle\Entity\Records;
 use SysEleven\PowerDnsBundle\Lib\PowerDnsObjectInterface;
 use SysEleven\PowerDnsBundle\Lib\Soa;
 
 /**
- * SysEleven\PowerDnsBundle\Entity\Domains
+ * Table structure for domains table, holds the information about zones. Note:
+ * there are three additional fields compared to the version that ships with powerdns.
+ * user holds the username of the user who last changed the domain,
+ * created and modified are holding the date of the creation and last modification.
  *
  * @ORM\Table(name="domains")
  * @ORM\Entity(repositoryClass="SysEleven\PowerDnsBundle\Entity\DomainsRepository")
@@ -29,13 +35,14 @@ use SysEleven\PowerDnsBundle\Lib\Soa;
  * @ORM\HasLifecycleCallbacks
  * @UniqueEntity(fields = {"name"}, message = "A zone with the same name already exists")
  *
- * @author Markus Seifert <m.seifert@syseleven.de>
- * @package syseleven_powerdns
- * @subpackage library
+ * @author  M. Seifert <m.seifert@syseleven.de>
+ * @package SysEleven\PowerDnsBundle\Entity
  */
 class Domains implements PowerDnsObjectInterface
 {
     /**
+     * ID of the domain / zone
+     *
      * @var integer $id
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
@@ -46,6 +53,8 @@ class Domains implements PowerDnsObjectInterface
     protected $id;
 
     /**
+     * Name of the Zone
+     *
      * @var string $name
      * @Assert\Length(
      *      min = "2",
@@ -60,6 +69,8 @@ class Domains implements PowerDnsObjectInterface
     protected $name;
 
     /**
+     * Master of the zone (slave zone only)
+     *
      * @var string $master
      *
      * @ORM\Column(name="master", type="string", length=128, nullable=true)
@@ -69,6 +80,8 @@ class Domains implements PowerDnsObjectInterface
     protected $master;
 
     /**
+     * Date of the last check (slave zone only)
+     *
      * @var integer $lastCheck
      *
      * @ORM\Column(name="last_check", type="integer", nullable=true)
@@ -76,6 +89,8 @@ class Domains implements PowerDnsObjectInterface
     protected $lastCheck;
 
     /**
+     * Type of the zone either master, native, slave or supermaster.
+     *
      * @var string $type
      *
      * @Assert\NotBlank(message="Type not given or not supported")
@@ -88,6 +103,8 @@ class Domains implements PowerDnsObjectInterface
     protected $type;
 
     /**
+     * Notified serial of the master zone
+     *
      * @var integer $notifiedSerial
      *
      * @ORM\Column(name="notified_serial", type="integer", nullable=true)
@@ -139,7 +156,7 @@ class Domains implements PowerDnsObjectInterface
     protected $needsSoaUpdate = false;
 
     /**
-     * Constructor
+     * Initializes the object
      */
     public function __construct()
     {
@@ -147,7 +164,7 @@ class Domains implements PowerDnsObjectInterface
     }
 
     /**
-     * Get id
+     * Returns the id of the domain
      *
      * @return integer 
      */
@@ -157,7 +174,7 @@ class Domains implements PowerDnsObjectInterface
     }
 
     /**
-     * Set name
+     * Sets the name of the domain to $name.
      *
      * @param string $name
      * @return Domains
@@ -170,7 +187,7 @@ class Domains implements PowerDnsObjectInterface
     }
 
     /**
-     * Get name
+     * Returns the name
      *
      * @return string 
      */
@@ -180,7 +197,7 @@ class Domains implements PowerDnsObjectInterface
     }
 
     /**
-     * Set master
+     * Sets the master to $master.
      *
      * @param string $master
      * @return Domains
@@ -193,7 +210,7 @@ class Domains implements PowerDnsObjectInterface
     }
 
     /**
-     * Get master
+     * Returns the value of master
      *
      * @return string 
      */
@@ -203,7 +220,7 @@ class Domains implements PowerDnsObjectInterface
     }
 
     /**
-     * Set lastCheck
+     * Sets last check to $lastCheck
      *
      * @param integer $lastCheck
      * @return Domains
@@ -216,7 +233,7 @@ class Domains implements PowerDnsObjectInterface
     }
 
     /**
-     * Get lastCheck
+     * Gets lastCheck
      *
      * @return integer 
      */
@@ -226,9 +243,9 @@ class Domains implements PowerDnsObjectInterface
     }
 
     /**
-     * Set type
+     * Sets the type of the zone to $type
      *
-     * @param string $type
+     * @param string $type one of [MASTER, NATIVE, SLAVE, SUPERSLAVE]
      * @return Domains
      */
     public function setType($type)
@@ -239,7 +256,7 @@ class Domains implements PowerDnsObjectInterface
     }
 
     /**
-     * Get type
+     * Gets the type of the domain
      *
      * @return string 
      */
@@ -249,7 +266,7 @@ class Domains implements PowerDnsObjectInterface
     }
 
     /**
-     * Set notifiedSerial
+     * Sets the notified serial to $serial
      *
      * @param integer $notifiedSerial
      * @return Domains
@@ -262,7 +279,7 @@ class Domains implements PowerDnsObjectInterface
     }
 
     /**
-     * Get notifiedSerial
+     * Returns the notified serial
      *
      * @return integer 
      */
@@ -272,7 +289,7 @@ class Domains implements PowerDnsObjectInterface
     }
 
     /**
-     * Set account
+     * Sets the account
      *
      * @param string $account
      * @return Domains
@@ -285,7 +302,7 @@ class Domains implements PowerDnsObjectInterface
     }
 
     /**
-     * Get account
+     * Gets the account
      *
      * @return string 
      */
@@ -296,30 +313,41 @@ class Domains implements PowerDnsObjectInterface
 
 
     /**
-     * Add records
+     * Add a new record to $this->records
      *
      * @param Records $records
      * @return Domains
      */
     public function addRecord(Records $records)
     {
-        $this->records[] = $records;
+        if ($this->records->contains($records)) {
+            return $this;
+        }
+
+        $this->records->add($records);
     
         return $this;
     }
 
     /**
-     * Remove records
+     * Remove the given record from this records
      *
      * @param Records $records
+     *
+     * @return $this
      */
     public function removeRecord(Records $records)
     {
-        $this->records->removeElement($records);
+        if ($this->records->contains($records)) {
+            $this->records->removeElement($records);
+        }
+
+        return $this;
     }
 
     /**
-     * Get records
+     * Returns the records of the domain / zone. The records are sorted by
+     * type first SOA, NS. MX then all other records.
      */
     public function getRecords()
     {
@@ -384,6 +412,8 @@ class Domains implements PowerDnsObjectInterface
     }
 
     /**
+     * Converts the object to an array.
+     *
      * @return array
      */
     public function toArray()
@@ -430,6 +460,11 @@ class Domains implements PowerDnsObjectInterface
         return null;
     }
 
+    /**
+     * Returns the serial number of the domain from the SOA record.
+     *
+     * @return mixed
+     */
     public function getSerial()
     {
         $soa = $this->getSoa();

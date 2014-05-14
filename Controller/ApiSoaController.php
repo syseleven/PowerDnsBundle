@@ -1,8 +1,15 @@
 <?php
 /**
- * powerdns-api
+ * This file is part of the SysEleven PowerDnsBundle.
+ *
+ * (c) SysEleven GmbH <http://www.syseleven.de/>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ *
  * @author   M. Seifert <m.seifert@syseleven.de>
-  * @package SysEleven\PowerDnsBundle\Controller
+ * @package SysEleven\PowerDnsBundle\Controller
  */
 namespace SysEleven\PowerDnsBundle\Controller;
 
@@ -20,10 +27,11 @@ use SysEleven\PowerDnsBundle\Lib\Exceptions\ValidationException;
 use SysEleven\PowerDnsBundle\Lib\RecordWorkflow;
 use SysEleven\PowerDnsBundle\Lib\Soa;
 use SysEleven\PowerDnsBundle\Lib\Tools;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 
 /**
- * Class ApiRecordsController
+ * Handles Operations on the SOA record of the given domin
  *
  * @author M. Seifert <m.seifert@syseleven.de>
  * @package SysEleven\PowerDnsBundle\Controller
@@ -35,8 +43,22 @@ class ApiSoaController extends ApiController
     /**
      * Returns the soa record of the given domain.
      *
+     * @ApiDoc(
+     *      resource="true"
+     *      description="Shows the details of the soa record of the given domain",
+     *      requirements={
+     *          {"name" = "domain", "dataType" = "integer", "requirement" = "\d+", "description" = "Id of the domain"},
+     *          {"name" = "_format", "dataType" = "string", "pattern" = "(json|xml)", "description" = "Output Format"}
+     *      },
+     *
+     *      output={
+     *          "class"="SysEleven\PowerDnsBundle\Entity\Records",
+     *          "groups"="details"
+     *      }
+     * )
+     *
      * @param Request $request
-     * @param         $domain
+     * @param int     $domain
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @Rest\Get("soa.{_format}", name="syseleven_powerdns_api_domains_soa")
@@ -68,10 +90,24 @@ class ApiSoaController extends ApiController
     }
 
     /**
-     * Creates a new SOA record for the given domain,
+     * Creates a new SOA record for the given domain, see documentation for details
+     *
+     * @ApiDoc(
+     *      description="Creates a new soa record for the given domain",
+     *      input="SysEleven\PowerDnsBundle\Form\SoaType",
+     *      requirements={
+     *          {"name" = "domain", "dataType" = "integer", "requirement" = "\d+", "description" = "Id of the domain"},
+     *          {"name" = "_format", "dataType" = "string", "pattern" = "(json|xml)", "description" = "Output Format"}
+     *      },
+     *
+     *      output={
+     *          "class"="SysEleven\PowerDnsBundle\Entity\Records",
+     *          "groups"="details"
+     *      }
+     * )
      *
      * @param Request $request
-     * @param         $domain
+     * @param int     $domain
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @Rest\Post("soa.{_format}", name="syseleven_powerdns_api_domains_soa_create")
@@ -128,8 +164,24 @@ class ApiSoaController extends ApiController
     }
 
     /**
+     * Updates the SOA record of the domain. see the documentation for details.
+     *
+     * @ApiDoc(
+     *      description="Updates soa record for the given domain",
+     *      input="SysEleven\PowerDnsBundle\Form\SoaType",
+     *      requirements={
+     *          {"name" = "domain", "dataType" = "integer", "requirement" = "\d+", "description" = "Id of the domain"},
+     *          {"name" = "_format", "dataType" = "string", "pattern" = "(json|xml)", "description" = "Output Format"}
+     *      },
+     *
+     *      output={
+     *          "class"="SysEleven\PowerDnsBundle\Entity\Records",
+     *          "groups"="details"
+     *      }
+     * )
+     *
      * @param Request $request
-     * @param         $domain
+     * @param int     $domain
      *
      * @return \FOS\RestBundle\View\View|\Symfony\Component\HttpFoundation\Response
      * @Rest\Put("soa.{_format}", name="syseleven_powerdns_api_domains_soa_update")
@@ -184,7 +236,23 @@ class ApiSoaController extends ApiController
     }
 
     /**
-     * @param $domain
+     * Deletes the SOA record from the domain, note without a SOA record your
+     * domain will not resolve.
+     *
+     * @ApiDoc(
+     *      description="Deletes the soa record of the given domain",
+     *      requirements={
+     *          {"name" = "domain", "dataType" = "integer", "requirement" = "\d+", "description" = "Id of the domain"},
+     *          {"name" = "_format", "dataType" = "string", "pattern" = "(json|xml)", "description" = "Output Format"}
+     *      },
+     *
+     *      output={
+     *          "class"="SysEleven\PowerDnsBundle\Entity\Records",
+     *          "groups"="details"
+     *      }
+     * )
+     *
+     * @param int $domain
      *
      * @return \FOS\RestBundle\View\View|\Symfony\Component\HttpFoundation\Response
      * @Rest\Delete("soa.{_format}", name="syseleven_powerdns_api_domains_soa_delete")

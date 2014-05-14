@@ -1,10 +1,17 @@
 <?php
 /**
- * powerdns-api
- * @author   M. Seifert <m.seifert@syseleven.de>
-  * @package SysEleven\PowerDnsBundle\Entity
+ * This file is part of the SysEleven PowerDnsBundle.
+ *
+ * (c) SysEleven GmbH <http://www.syseleven.de/>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @author  M. Seifert <m.seifert@syseleven.de>
+ * @package SysEleven\PowerDnsBundle\Entity
  */
 namespace SysEleven\PowerDnsBundle\Entity;
+
 use Doctrine\ORM\EntityRepository;
 use SysEleven\PowerDnsBundle\Lib\PowerDnsObjectInterface;
 

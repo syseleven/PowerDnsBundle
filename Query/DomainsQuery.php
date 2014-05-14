@@ -1,17 +1,23 @@
 <?php
 /**
- * powerdns-api
- * 
- * @author Markus Seifert <m.seifert@syseleven.de>
+ * This file is part of the SysEleven PowerDnsBundle.
+ *
+ * (c) SysEleven GmbH <http://www.syseleven.de/>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @author   M. Seifert <m.seifert@syseleven.de>
+ * @package SysEleven\PowerDnsBundle\Query
  */
-
 namespace SysEleven\PowerDnsBundle\Query;
 
 
 use SysEleven\PowerDnsBundle\Lib\QueryAbstract;
 
 /**
- * Filter class for domain queries
+ * Query class for domain searches, provides the field definition for the domain
+ * search form
  *
  * @author Markus Seifert <m.seifert@syseleven.de>
  * @package SysEleven\PowerDnsBundle\Query

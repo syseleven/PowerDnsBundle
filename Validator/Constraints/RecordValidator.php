@@ -1,10 +1,14 @@
 <?php
 /**
- * Syseleven PowerDns API
+ * This file is part of the SysEleven PowerDnsBundle.
  *
- * @author Markus Seifert <m.seifert@syseleven.de>
- * @package syseleven_powerdns
- * @subpackage library
+ * (c) SysEleven GmbH <http://www.syseleven.de/>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @author   M. Seifert <m.seifert@syseleven.de>
+ * @package SysEleven\PowerDnsBundle\Validator\Constraints
  */
 namespace SysEleven\PowerDnsBundle\Validator\Constraints;
 
@@ -15,6 +19,12 @@ use SysEleven\PowerDnsBundle\Form\Transformer\PtrTransformer;
 use SysEleven\PowerDnsBundle\Lib\Soa;
 use Zend\Validator\Hostname;
 
+/**
+ * Validates a given record entity depending on the type of the record.
+ *
+ * @author  M. Seifert <m.seifert@syseleven.de>
+ * @package SysEleven\PowerDnsBundle\Validator\Constraints
+ */
 class RecordValidator extends ConstraintValidator
 {
     /**

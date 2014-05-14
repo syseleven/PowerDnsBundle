@@ -33,11 +33,10 @@
     <php>
         <ini name="memory_limit" value="1024M" />
         <ini name="xdebug.max_nesting_level" value="-1" />
-        <env name="BOOTSTRAP_CLEAN_DATABASE_ENV" value="test"/>
-        <env name="BOOTSTRAP_LOAD_FIXTURES_ENV" value="test"/>
-        <env name="BOOTSTRAP_CLEAR_CACHE_ENV" value="test"/>
-        <const name="DB_USER" value="root"/>
-        <const name="DB_PASSWORD" value="root"/>
+        <server name="SYMFONY__DB__HOST" value="127.0.0.1"/>
+        <server name="SYMFONY__DB__DATABASE" value="powerdns_test"/>
+        <server name="SYMFONY__DB__USER" value="root"/>
+        <server name="SYMFONY__DB__PASSWORD" value=""/>
     </php>
 </phpunit>
 

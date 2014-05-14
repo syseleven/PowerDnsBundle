@@ -1,8 +1,15 @@
 <?php
 /**
- * powerdns-api
- * @author   M. Seifert <m.seifert@syseleven.de>
-  * @package SysEleven\PowerDnsBundle\Controller
+ * This file is part of the SysEleven PowerDnsBundle.
+ *
+ * (c) SysEleven GmbH <http://www.syseleven.de/>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ *
+ *  @author   M. Seifert <m.seifert@syseleven.de>
+ * @package SysEleven\PowerDnsBundle\Controller
  */
 namespace SysEleven\PowerDnsBundle\Controller;
 
@@ -21,6 +28,7 @@ use SysEleven\PowerDnsBundle\Lib\RecordWorkflow;
 use SysEleven\PowerDnsBundle\Lib\Tools;
 use SysEleven\PowerDnsBundle\Query\RecordsHistoryQuery;
 use SysEleven\PowerDnsBundle\Query\RecordsQuery;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 /**
  * Provides API calls for listing, displaying, creating, manipulating and
@@ -36,8 +44,28 @@ class ApiRecordsController extends ApiController
     /**
      * Returns a list of records for the given domain.
      *
+     * @ApiDoc(
+     *      resource=true,
+     *      description="Returns a list of records for the given domain",
+     *      input="SysEleven\PowerDnsBundle\Form\RecordsSearchType",
+     *      requirements={
+     *          {"name" = "domain", "dataType" = "integer", "description" = "id of the domain to query"},
+     *          {"name" = "_format", "description" = "Output Format"}
+     *      },
+     *
+     *      output={
+     *          "class"="SysEleven\PowerDnsBundle\Entity\Records",
+     *          "groups"="list"},
+     *
+     *      parameters={
+     *          {"name"="limit", "dataType"="integer", "required"=false, "description"="Number of records to return"},
+     *          {"name"="offset", "dataType"="integer", "required"=false, "description"="Record to start with"},
+     *          {"name"="order", "dataType"="array", "required"=false, "description"="Sort the result"}
+     *      }
+     * )
+     *
      * @param Request $request
-     * @param         $domain
+     * @param int     $domain
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @Rest\Get("/records.{_format}", name="syseleven_powerdns_api_domains_records")
@@ -86,9 +114,23 @@ class ApiRecordsController extends ApiController
      * Returns the details of the given record, Note: the records of a domain
      * are also returned in the detail view of the domain.
      *
+     * @ApiDoc(
+     *      description="Shows the details of the record specified by domain and record",
+     *      requirements={
+     *          {"name" = "domain", "dataType" = "integer", "requirement" = "\d+", "description" = "Id of the domain"},
+     *          {"name" = "record", "dataType" = "integer", "requirement" = "\d+", "description" = "Id of the record"},
+     *          {"name" = "_format", "dataType" = "string", "pattern" = "(json|xml)", "description" = "Output Format"}
+     *      },
      *
+     *      output={
+     *          "class"="SysEleven\PowerDnsBundle\Entity\Domains",
+     *          "groups"="details"
+     *      }
+     * )
+     *
+     * @param int     $domain
      * @param int     $record
-     * @param         $domain
+     *
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @Rest\Get("/records/{record}.{_format}", name="syseleven_powerdns_api_domains_records_show")
@@ -131,10 +173,25 @@ class ApiRecordsController extends ApiController
 
 
     /**
-     * Creates a new Record in the backend
+     * Creates a new record in the given domain. Note when creating a new
+     * record the serial of the domain will automatically updated.
+     *
+     * @ApiDoc(
+     *      description="Creates a new record",
+     *      input="SysEleven\PowerDnsBundle\Form\RecordsType",
+     *      requirements={
+     *          {"name" = "domain", "dataType" = "integer", "requirement" = "\d+", "description" = "Id of the domain"},
+     *          {"name" = "_format", "dataType" = "string", "pattern" = "(json|xml)", "description" = "Output Format"}
+     *      },
+     *
+     *      output={
+     *          "class"="SysEleven\PowerDnsBundle\Entity\Records",
+     *          "groups"="details"
+     *      }
+     * )
      *
      * @param Request $request
-     * @param         $domain
+     * @param int     $domain
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @Rest\Post("/records.{_format}", name="syseleven_powerdns_api_domains_records_create")
@@ -183,9 +240,24 @@ class ApiRecordsController extends ApiController
     /**
      * Updates the given record with the submitted data.
      *
+     * @ApiDoc(
+     *      description="Updates the given record",
+     *      input="SysEleven\PowerDnsBundle\Form\RecordsType",
+     *      requirements={
+     *          {"name" = "domain", "dataType" = "integer", "requirement" = "\d+", "description" = "Id of the domain"},
+     *          {"name" = "record", "dataType" = "integer", "requirement" = "\d+", "description" = "Id of the record to update"},
+     *          {"name" = "_format", "dataType" = "string", "pattern" = "(json|xml)", "description" = "Output Format"}
+     *      },
+     *
+     *      output={
+     *          "class"="SysEleven\PowerDnsBundle\Entity\Records",
+     *          "groups"="details"
+     *      }
+     * )
+     *
      * @param Request $request
-     * @param         $domain
-     * @param         $record
+     * @param int     $domain
+     * @param int     $record
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @Rest\Put("/records/{record}.{_format}", name="syseleven_powerdns_api_domains_records_update")
@@ -248,8 +320,17 @@ class ApiRecordsController extends ApiController
     /**
      * Deletes the record in the backend.
      *
-     * @param         $domain
-     * @param         $record
+     * @ApiDoc(
+     *      description="deletes the given record",
+     *      requirements={
+     *          {"name" = "domain", "dataType" = "integer", "requirement" = "\d+", "description" = "Id of the domain"},
+     *          {"name" = "record", "dataType" = "integer", "requirement" = "\d+", "description" = "Id of the record to delete"},
+     *          {"name" = "_format", "dataType" = "string", "pattern" = "(json|xml)", "description" = "Output Format"}
+     *      }
+     * )
+     *
+     * @param int $domain
+     * @param int $record
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @Rest\Delete("/records/{record}.{_format}", name="syseleven_powerdns_api_domains_records_delete")
@@ -294,6 +375,26 @@ class ApiRecordsController extends ApiController
 
     /**
      * Returns the history of the given record
+     *
+     * @ApiDoc(
+     *      description="displays the changes of the given record",
+     *      input="SysEleven\PowerDnsBundle\Form\RecordsHistoryQueryType",
+     *      requirements={
+     *          {"name" = "domain", "dataType" = "integer", "requirement" = "\d+", "description" = "Id of the domain"},
+     *          {"name" = "record", "dataType" = "integer", "requirement" = "\d+", "description" = "Id of the record"},
+     *          {"name" = "_format", "dataType" = "string", "pattern" = "(json|xml)", "description" = "Output Format"}
+     *      },
+     *
+     *      output={
+     *          "class"="SysEleven\PowerDnsBundle\Entity\RecordsHistory",
+     *          "groups"="compact"
+     *      },
+     *      parameters={
+     *          {"name"="limit", "dataType"="integer", "required"=false, "description"="Number of records to return"},
+     *          {"name"="offset", "dataType"="integer", "required"=false, "description"="Record to start with"},
+     *          {"name"="order", "dataType"="array", "required"=false, "description"="Sort the result"}
+     *      }
+     * )
      *
      * @param Request $request
      * @param         $domain

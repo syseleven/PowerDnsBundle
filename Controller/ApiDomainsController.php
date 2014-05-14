@@ -1,8 +1,15 @@
 <?php
 /**
- *  powerdns-api
+ * This file is part of the SysEleven PowerDnsBundle.
+ *
+ * (c) SysEleven GmbH <http://www.syseleven.de/>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ *
  *  @author   M. Seifert <m.seifert@syseleven.de>
-  * @package SysEleven\PowerDnsBundle\Controller
+ * @package SysEleven\PowerDnsBundle\Controller
  */
 namespace SysEleven\PowerDnsBundle\Controller;
 
@@ -37,6 +44,7 @@ class ApiDomainsController extends ApiController
      * Returns a list of domains, the list can optionally filtered by $filter
      * and ordered by $order, by default all records found are returned to
      * limit the result use the $limit and $offset parameters.
+     * See the documentation for details on the search parameters.
      *
      * @ApiDoc(
      *      resource=true,
@@ -97,7 +105,7 @@ class ApiDomainsController extends ApiController
     }
 
     /**
-     * Shows the details of the domain specified by $id
+     * Shows the details of the domain specified by $id.
      *
      * @ApiDoc(
      *      description="Shows a single domain",
@@ -139,6 +147,9 @@ class ApiDomainsController extends ApiController
 
     /**
      * Creates a new domain with the given data.
+     *
+     * When creating a new domain, a new SOA record will be created also.
+     * See the documentation for details on the parameters.
      *
      * @ApiDoc(
      *      description="Creates a new domain",
@@ -188,7 +199,8 @@ class ApiDomainsController extends ApiController
 
     /**
      * Updates the domain specified by domain, despite the fact that PUT is
-     * used it performs a Patch Operation
+     * used it performs a Patch Operation. See the documentation for details
+     * on the parameters.
      *
      * @ApiDoc(
      *      description="Updates the given domain object",
@@ -320,7 +332,7 @@ class ApiDomainsController extends ApiController
     }
 
     /**
-     * Removes the domain from the backend
+     * Removes the domain from the backend.
      *
      * @ApiDoc(
      *      description="deletes the given domain",

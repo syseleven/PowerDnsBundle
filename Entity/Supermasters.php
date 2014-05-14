@@ -1,10 +1,14 @@
 <?php
 /**
- * Syseleven PowerDns API
+ * This file is part of the SysEleven PowerDnsBundle.
  *
- * @author Markus Seifert <m.seifert@syseleven.de>
- * @package syseleven_powerdns
- * @subpackage library
+ * (c) SysEleven GmbH <http://www.syseleven.de/>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @author  M. Seifert <m.seifert@syseleven.de>
+ * @package SysEleven\PowerDnsBundle\Entity
  */
 namespace SysEleven\PowerDnsBundle\Entity;
 
@@ -16,9 +20,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="supermasters")
  * @ORM\Entity
  *
- * @author Markus Seifert <m.seifert@syseleven.de>
- * @package syseleven_powerdns
- * @subpackage library
+ * @author  M. Seifert <m.seifert@syseleven.de>
+ * @package SysEleven\PowerDnsBundle\Entity
  */
 class Supermasters
 {

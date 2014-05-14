@@ -1,77 +1,36 @@
 <?php
 /**
- * SysEleven SMAPI 2 Project
+ * This file is part of the SysEleven PowerDnsBundle.
  *
- * @author     Markus Seifert <m.seifert@syseleven.de>
- * @package    package
- * @subpackage subpackage
+ * (c) SysEleven GmbH <http://www.syseleven.de/>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @author   M. Seifert <m.seifert@syseleven.de>
+ * @package SysEleven\PowerDnsBundle\Lib
  */
 
 namespace SysEleven\PowerDnsBundle\Lib;
 
  
 /**
- * Tools
+ * Several tools used in the app.
  *
- * @author     Markus Seifert <m.seifert@syseleven.de>
- * @package    package
- * @subpackage subpackage
+ * @author   M. Seifert <m.seifert@syseleven.de>
+ * @package SysEleven\PowerDnsBundle\Lib
  */ 
 class Tools 
 {
-    /**
-     * Checks if the first char of the given string is one of > < ! and return
-     * the sql operator for it.
-     *
-     * @param string $str
-     * @return string
-     */
-    public static function getOperatorFromString($str)
-    {
-        if(!is_string($str) || is_null($str) || 0 == strlen($str)) {
-            return '=';
-        }
-
-        $fc = substr($str, 0, 1);
-        $op = '=';
-        if (in_array($fc, array('!','>','<'))) {
-            switch ($fc) {
-                case '!':
-                    $op = '<>';
-                    break;
-                case '>':
-                    $op = '>=';
-                    break;
-                case '<':
-                    $op = '<=';
-                    break;
-            }
-        }
-
-        return $op;
-    }
 
     /**
-     * Strips the first char from the string if it is in [<, >, !]
+     * converts a given symfony violation list to an array containing the keys
+     * and the messages
      *
-     * @param $str
-     * @return mixed
+     * @param $errors
+     *
+     * @return array
      */
-    public static function stripOperatorFromString($str)
-    {
-        if (!is_string($str) || is_null($str) || 0 == strlen($str)) {
-            return $str;
-        }
-
-        $fc = substr($str, 0, 1);
-        if (in_array($fc, array('!','>','<'))) {
-            $str = substr_replace($str, '', 0, 1);
-        }
-
-        return $str;
-    }
-
-
     public static function prepareSymfonyErrorArray($errors)
     {
         $r = array();

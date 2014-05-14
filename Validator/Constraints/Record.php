@@ -1,22 +1,26 @@
 <?php
 /**
- * Syseleven PowerDns API
+ * This file is part of the SysEleven PowerDnsBundle.
  *
- * @author Markus Seifert <m.seifert@syseleven.de>
- * @package syseleven_powerdns
- * @subpackage library
+ * (c) SysEleven GmbH <http://www.syseleven.de/>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @author   M. Seifert <m.seifert@syseleven.de>
+ * @package SysEleven\PowerDnsBundle\Validator\Constraints
  */
 namespace SysEleven\PowerDnsBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
 /**
- * Validation Contraints for dns records.
+ * Validation constraint for dns records.
  *
  * @Annotation
- * @author Markus Seifert <m.seifert@syseleven.de>
- * @package syseleven_powerdns
- * @subpackage library
+ *
+ * @author  M. Seifert <m.seifert@syseleven.de>
+ * @package SysEleven\PowerDnsBundle\Validator\Constraints
  */
 class Record extends Constraint
 {

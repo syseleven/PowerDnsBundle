@@ -1,8 +1,14 @@
 <?php
 /**
- * powerdns-api
+ * This file is part of the SysEleven PowerDnsBundle.
+ *
+ * (c) SysEleven GmbH <http://www.syseleven.de/>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
  * @author   M. Seifert <m.seifert@syseleven.de>
-  * @package SysEleven\PowerDnsBundle\Tests
+ * @package SysEleven\PowerDnsBundle\Tests
  */
 
 namespace SysEleven\PowerDnsBundle\Tests;
@@ -19,6 +25,12 @@ use SysEleven\PowerDnsBundle\Form\RecordsType;
 use SysEleven\PowerDnsBundle\Lib\DomainWorkflow;
 use SysEleven\PowerDnsBundle\Lib\Soa;
 
+/**
+ * Tests the functionality of the record form class.
+ *
+ * @author  M. Seifert <m.seifert@syseleven.de>
+ * @package SysEleven\PowerDnsBundle\Tests
+ */
 class RecordsTypeTest extends WebTestCase
 {
     /**

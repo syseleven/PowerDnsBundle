@@ -1,8 +1,15 @@
 <?php
 /**
- * powerdns-api
- * @author   M. Seifert <m.seifert@syseleven.de>
-  * @package SysEleven\PowerDnsBundle\Controller
+ * This file is part of the SysEleven PowerDnsBundle.
+ *
+ * (c) SysEleven GmbH <http://www.syseleven.de/>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ *
+ *  @author   M. Seifert <m.seifert@syseleven.de>
+ * @package SysEleven\PowerDnsBundle\Controller
  */
 namespace SysEleven\PowerDnsBundle\Controller;
 
@@ -18,6 +25,7 @@ use SysEleven\PowerDnsBundle\Lib\RecordWorkflow;
 use SysEleven\PowerDnsBundle\Query\DomainsQuery;
 use SysEleven\PowerDnsBundle\Query\RecordsHistoryQuery;
 use SysEleven\PowerDnsBundle\Query\RecordsQuery;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 /**
  * Performs searches in the database backend.
@@ -29,6 +37,26 @@ use SysEleven\PowerDnsBundle\Query\RecordsQuery;
 class ApiSearchController extends ApiController
 {
     /**
+     * Performs a search in the domains and records table. See the documentation for details on the search parameters.
+     *
+     * @ApiDoc(
+     *      description="Searches in the domains table",
+     *      input="SysEleven\PowerDnsBundle\Form\DomainsSearchType",
+     *      requirements={
+     *          {"name" = "_format", "description" = "Output Format"}
+     *      },
+     *
+     *      output={
+     *          "class"="SysEleven\PowerDnsBundle\Entity\Domains",
+     *          "groups"="list"},
+     *
+     *      parameters={
+     *          {"name"="limit", "dataType"="integer", "required"=false, "description"="Number of records to return"},
+     *          {"name"="offset", "dataType"="integer", "required"=false, "description"="Record to start with"},
+     *          {"name"="order", "dataType"="array", "required"=false, "description"="Sort the result"}
+     *      }
+     * )
+     *
      * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -66,6 +94,27 @@ class ApiSearchController extends ApiController
     }
 
     /**
+     * Performs a search in the records table. See the documentation for details on the search parameters.
+     *
+     *
+     * @ApiDoc(
+     *      description="Searches in the records table",
+     *      input="SysEleven\PowerDnsBundle\Form\RecordsSearchType",
+     *      requirements={
+     *          {"name" = "_format", "description" = "Output Format"}
+     *      },
+     *
+     *      output={
+     *          "class"="SysEleven\PowerDnsBundle\Entity\Records",
+     *          "groups"="list"},
+     *
+     *      parameters={
+     *          {"name"="limit", "dataType"="integer", "required"=false, "description"="Number of records to return"},
+     *          {"name"="offset", "dataType"="integer", "required"=false, "description"="Record to start with"},
+     *          {"name"="order", "dataType"="array", "required"=false, "description"="Sort the result"}
+     *      }
+     * )
+     *
      * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -104,6 +153,25 @@ class ApiSearchController extends ApiController
     }
 
     /**
+     * Performs a search in the records history. See the documentation for details on the search parameters.
+     *
+     * @ApiDoc(
+     *      description="Searches in the records history table",
+     *      input="SysEleven\PowerDnsBundle\Form\RecordsHistorySearchType",
+     *      requirements={
+     *          {"name" = "_format", "description" = "Output Format"}
+     *      },
+     *
+     *      output={
+     *          "class"="SysEleven\PowerDnsBundle\Entity\RecordsHistory",
+     *          "groups"="compact"},
+     *
+     *      parameters={
+     *          {"name"="limit", "dataType"="integer", "required"=false, "description"="Number of records to return"},
+     *          {"name"="offset", "dataType"="integer", "required"=false, "description"="Record to start with"},
+     *          {"name"="order", "dataType"="array", "required"=false, "description"="Sort the result"}
+     *      }
+     * )
      * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response

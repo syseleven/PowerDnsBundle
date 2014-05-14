@@ -1,8 +1,14 @@
 <?php
 /**
- * powerdns-api
+ * This file is part of the SysEleven PowerDnsBundle.
+ *
+ * (c) SysEleven GmbH <http://www.syseleven.de/>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
  * @author   M. Seifert <m.seifert@syseleven.de>
-  * @package SysEleven\PowerDnsBundle\Query
+ * @package SysEleven\PowerDnsBundle\Query
  */
 namespace SysEleven\PowerDnsBundle\Query;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,7 +16,8 @@ use SysEleven\PowerDnsBundle\Lib\QueryAbstract;
 
 
 /**
- * Class RecordsHistoryQuery
+ * Query class for record history searches, provides the field definition for the record
+ * history search form
  *
  * @author M. Seifert <m.seifert@syseleven.de>
  * @package SysEleven\PowerDnsBundle\Query

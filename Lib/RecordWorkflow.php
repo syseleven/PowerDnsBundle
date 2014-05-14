@@ -1,10 +1,15 @@
 <?php
 /**
- * powerdns-api
- * 
- * @author Markus Seifert <m.seifert@syseleven.de>
+ * This file is part of the SysEleven PowerDnsBundle.
+ *
+ * (c) SysEleven GmbH <http://www.syseleven.de/>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @author   M. Seifert <m.seifert@syseleven.de>
+ * @package SysEleven\PowerDnsBundle\Lib
  */
-
 namespace SysEleven\PowerDnsBundle\Lib;
 
 
@@ -14,6 +19,9 @@ use SysEleven\PowerDnsBundle\Entity\RecordsHistory;
 use SysEleven\PowerDnsBundle\Entity\RecordsHistoryRepository;
 
 /**
+ * Provides method for creating, updating and deleting records
+ *
+ *
  * @author Markus Seifert <m.seifert@syseleven.de>
  * @package SysEleven\PowerDnsBundle\Lib
  */
@@ -25,12 +33,14 @@ class RecordWorkflow extends WorkflowAbstract
     protected $repositoryClass = 'SysElevenPowerDnsBundle:Records';
 
     /**
-     * Creates a new Object in the backend
+     * Creates a new record in the backend, updates the soa serial number, and
+     * creates a history entry for the record
      *
      * @param PowerDnsObjectInterface $obj
      * @param array $options
      * @param bool $force
-     * @return mixed
+     *
+*@return mixed
      */
     public function create(PowerDnsObjectInterface $obj, array $options = array(), $force = false)
     {
@@ -47,7 +57,8 @@ class RecordWorkflow extends WorkflowAbstract
     }
 
     /**
-     * Updates the object in the backend
+     * Updates a given record in the backend, updates the soa serial number, and
+     * creates a history entry for the record
      *
      * @param PowerDnsObjectInterface $obj
      * @param array $options
@@ -70,7 +81,8 @@ class RecordWorkflow extends WorkflowAbstract
     }
 
     /**
-     * Deletes the object in the database
+     * Deletes a given record from the backend, updates the soa serial number, and
+     * creates a history entry for the record
      *
      * @param PowerDnsObjectInterface $obj
      * @param bool $force
