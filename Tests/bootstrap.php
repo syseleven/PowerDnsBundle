@@ -31,6 +31,8 @@ $kernel->boot();
 
 $application = new Application($kernel);
 $application->setAutoExit(false);
+runConsole("doctrine:database:drop", array("--force" => true), $application);
+runConsole("doctrine:database:create", array(), $application);
 runConsole("doctrine:schema:drop", array("--force" => true), $application);
 runConsole("doctrine:schema:create",array(), $application);
 runConsole("doctrine:fixtures:load", array("--fixtures" => __DIR__ . "/../DataFixtures",'-n' => true), $application);
