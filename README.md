@@ -1,6 +1,8 @@
 PowerDnsBundle
 ==============
 
+[![Build Status](https://travis-ci.org/syseleven/PowerDnsBundle.svg?branch=master)](https://travis-ci.org/syseleven/PowerDnsBundle)
+
 This Bundle provides an ReST API for the PowerDNS server written in PHP and integrated in the Symfony framework. It includes methods for creating and maintaining zone and domain records.
 
 Installation
