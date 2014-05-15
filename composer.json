@@ -1,5 +1,5 @@
 {
-    "name": "SysEleven/PowerDnsBundle",
+    "name": "syseleven/powerdnsbundle",
     "type": "symfony-bundle",
     "description": "This bundle provides (yet another) api for the PowerDns DNS server. It allows the creation and modification of zones and records in the server.",
     "keywords": ["rest","powerdns","api","syseleven"],
