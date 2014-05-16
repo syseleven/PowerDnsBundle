@@ -25,11 +25,13 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class ApiRecordsControllerTest extends WebTestCase
 {
 
+    public $urlPrefix = '';
+
     public function testIndex()
     {
         $domainID = 1;
         $client = static::createClient();
-        $client->request('GET', '/api/domains/'.$domainID.'/records.json',array());
+        $client->request('GET', $this->urlPrefix.'/api/domains/'.$domainID.'/records.json',array());
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -40,7 +42,7 @@ class ApiRecordsControllerTest extends WebTestCase
 
         $domainID = 1;
         $client = static::createClient();
-        $client->request('GET', '/api/domains/99999999/records.json',array());
+        $client->request('GET', $this->urlPrefix.'/api/domains/99999999/records.json',array());
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -62,7 +64,7 @@ class ApiRecordsControllerTest extends WebTestCase
 
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('POST', '/api/domains/'.$domainID.'/records.json',$data);
+        $client->request('POST', $this->urlPrefix.'/api/domains/'.$domainID.'/records.json',$data);
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -81,7 +83,7 @@ class ApiRecordsControllerTest extends WebTestCase
 
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('POST', '/api/domains/'.$domainID.'/records.json',$data);
+        $client->request('POST', $this->urlPrefix.'/api/domains/'.$domainID.'/records.json',$data);
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -98,7 +100,7 @@ class ApiRecordsControllerTest extends WebTestCase
 
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('POST', '/api/domains/'.$domainID.'/records.json',$data);
+        $client->request('POST', $this->urlPrefix.'/api/domains/'.$domainID.'/records.json',$data);
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -114,7 +116,7 @@ class ApiRecordsControllerTest extends WebTestCase
 
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('POST', '/api/domains/99999/records.json',$data);
+        $client->request('POST', $this->urlPrefix.'/api/domains/99999/records.json',$data);
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -136,7 +138,7 @@ class ApiRecordsControllerTest extends WebTestCase
         $domainID = 1;
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('GET', '/api/domains/'.$domainID.'/records/'.$recordID.'.json',array());
+        $client->request('GET', $this->urlPrefix.'/api/domains/'.$domainID.'/records/'.$recordID.'.json',array());
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -149,7 +151,7 @@ class ApiRecordsControllerTest extends WebTestCase
         $domainID = 1;
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('GET', '/api/domains/'.$domainID.'/records/99999.json',array());
+        $client->request('GET', $this->urlPrefix.'/api/domains/'.$domainID.'/records/99999.json',array());
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -161,7 +163,7 @@ class ApiRecordsControllerTest extends WebTestCase
         $domainID = 1;
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('GET', '/api/domains/'.$domainID.'/records/8.json',array());
+        $client->request('GET', $this->urlPrefix.'/api/domains/'.$domainID.'/records/8.json',array());
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -185,7 +187,7 @@ class ApiRecordsControllerTest extends WebTestCase
 
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('PUT', '/api/domains/1/records/'.$recordID.'.json',$data);
+        $client->request('PUT', $this->urlPrefix.'/api/domains/1/records/'.$recordID.'.json',$data);
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -206,7 +208,7 @@ class ApiRecordsControllerTest extends WebTestCase
 
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('PUT', '/api/domains/1/records/'.$recordID.'.json',$data);
+        $client->request('PUT', $this->urlPrefix.'/api/domains/1/records/'.$recordID.'.json',$data);
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -222,7 +224,7 @@ class ApiRecordsControllerTest extends WebTestCase
 
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('PUT', '/api/domains/1/records/'.$recordID.'.json',$data);
+        $client->request('PUT', $this->urlPrefix.'/api/domains/1/records/'.$recordID.'.json',$data);
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -234,7 +236,7 @@ class ApiRecordsControllerTest extends WebTestCase
 
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('PUT', '/api/domains/1/records/8.json', $data);
+        $client->request('PUT', $this->urlPrefix.'/api/domains/1/records/8.json', $data);
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -245,7 +247,7 @@ class ApiRecordsControllerTest extends WebTestCase
 
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('PUT', '/api/domains/999999/records/8.json', $data);
+        $client->request('PUT', $this->urlPrefix.'/api/domains/999999/records/8.json', $data);
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -269,7 +271,7 @@ class ApiRecordsControllerTest extends WebTestCase
         $domainID = 1;
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('GET', '/api/domains/'.$domainID.'/records/'.$recordID.'/history.json',array());
+        $client->request('GET', $this->urlPrefix.'/api/domains/'.$domainID.'/records/'.$recordID.'/history.json',array());
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -284,7 +286,7 @@ class ApiRecordsControllerTest extends WebTestCase
         $domainID = 1;
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('GET', '/api/domains/'.$domainID.'/records/99999/history.json',array());
+        $client->request('GET', $this->urlPrefix.'/api/domains/'.$domainID.'/records/99999/history.json',array());
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -296,7 +298,7 @@ class ApiRecordsControllerTest extends WebTestCase
         $domainID = 1;
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('GET', '/api/domains/'.$domainID.'/records/8/history.json',array());
+        $client->request('GET', $this->urlPrefix.'/api/domains/'.$domainID.'/records/8/history.json',array());
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -316,7 +318,7 @@ class ApiRecordsControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('DELETE', '/api/domains/1/records/8.json', array());
+        $client->request('DELETE', $this->urlPrefix.'/api/domains/1/records/8.json', array());
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -327,7 +329,7 @@ class ApiRecordsControllerTest extends WebTestCase
 
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('DELETE', '/api/domains/999999/records/8.json', array());
+        $client->request('DELETE', $this->urlPrefix.'/api/domains/999999/records/8.json', array());
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -338,7 +340,7 @@ class ApiRecordsControllerTest extends WebTestCase
 
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('DELETE', '/api/domains/1/records/'.$recordID.'.json', array());
+        $client->request('DELETE', $this->urlPrefix.'/api/domains/1/records/'.$recordID.'.json', array());
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);

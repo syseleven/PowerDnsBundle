@@ -23,11 +23,13 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 class ApiSoaControllerTest extends WebTestCase
 {
+    public $urlPrefix = '';
+    
     public function testIndex()
     {
         $domainID = 1;
         $client = static::createClient();
-        $client->request('GET', '/api/domains/'.$domainID.'/soa.json',array());
+        $client->request('GET', $this->urlPrefix.'/api/domains/'.$domainID.'/soa.json',array());
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -38,7 +40,7 @@ class ApiSoaControllerTest extends WebTestCase
 
         $domainID = 1;
         $client = static::createClient();
-        $client->request('GET', '/api/domains/99999999/soa.json',array());
+        $client->request('GET', $this->urlPrefix.'/api/domains/99999999/soa.json',array());
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -53,7 +55,7 @@ class ApiSoaControllerTest extends WebTestCase
     {
         $domainID = 1;
         $client = static::createClient();
-        $client->request('DELETE', '/api/domains/'.$domainID.'/soa.json',array());
+        $client->request('DELETE', $this->urlPrefix.'/api/domains/'.$domainID.'/soa.json',array());
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -64,7 +66,7 @@ class ApiSoaControllerTest extends WebTestCase
 
         $domainID = 1;
         $client = static::createClient();
-        $client->request('GET', '/api/domains/1/soa.json',array());
+        $client->request('GET', $this->urlPrefix.'/api/domains/1/soa.json',array());
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -80,7 +82,7 @@ class ApiSoaControllerTest extends WebTestCase
         $domainID = 1;
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('POST', '/api/domains/'.$domainID.'/soa.json',array('default_ttl' => 100));
+        $client->request('POST', $this->urlPrefix.'/api/domains/'.$domainID.'/soa.json',array('default_ttl' => 100));
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
@@ -101,7 +103,7 @@ class ApiSoaControllerTest extends WebTestCase
         $domainID = 1;
         $client = static::createClient();
         $client->followRedirects(true);
-        $client->request('PUT', '/api/domains/'.$domainID.'/soa.json',array('default_ttl' => 3600));
+        $client->request('PUT', $this->urlPrefix.'/api/domains/'.$domainID.'/soa.json',array('default_ttl' => 3600));
 
         $cnt = $client->getResponse()->getContent();
         $cnt = json_decode($cnt, true);
