@@ -64,6 +64,13 @@ abstract class WorkflowAbstract implements ContainerAwareInterface
      */
     protected $connectionName;
 
+    /**
+     * Array of soa defaults
+     *
+     * @var array
+     */
+    protected $soaDefaults = array();
+
 
     /**
      * Searches in the backend and returns a query builder object
@@ -196,7 +203,7 @@ abstract class WorkflowAbstract implements ContainerAwareInterface
             $this->updateSoa($domainObj);
         }
 
-        $soaDefaults = new Soa();
+        $soaDefaults = new Soa($this->getSoaDefaults());
 
         $soa = new Records();
         $soa->setName($domainObj->getName());
@@ -364,4 +371,6 @@ abstract class WorkflowAbstract implements ContainerAwareInterface
     {
         return $this->connectionName;
     }
+
+
 }

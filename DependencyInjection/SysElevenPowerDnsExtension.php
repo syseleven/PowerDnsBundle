@@ -40,5 +40,7 @@ class SysElevenPowerDnsExtension extends Extension
 
         $container->setParameter('syseleven.pdns.entity_manager', $config['entity_manager']);
         $container->setParameter('syseleven.pdns.result_wrapper', $config['result_wrapper']);
+        $container->setParameter('syseleven.pdns.soa_defaults', $config['soa_defaults']);
+
     }
 }

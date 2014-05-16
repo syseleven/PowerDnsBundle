@@ -11,6 +11,7 @@ services:
         calls:
             - [setContainer,[@service_container]]
             - [setConnection, [%syseleven.pdns.entity_manager%]]
+            - [setSoaDefaults, [%syseleven.pdns.soa_defaults%]]
 
 
 
@@ -20,6 +21,7 @@ services:
         calls:
             - [setContainer,[@service_container]]
             - [setConnection, [%syseleven.pdns.entity_manager%]]
+            - [setSoaDefaults, [%syseleven.pdns.soa_defaults%]]
 
 
     # custom logger for record and domain updates

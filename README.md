@@ -19,19 +19,52 @@ Then run `php composer.phar update and activate the Bundle in your kernel and ad
 
 ```php
     $bundles = array(
-        new SysElevenPowerDnsBundle();
+        ...
+        new SysEleven\PowerDnsBundle\SysElevenPowerDnsBundle(),
     );
 ````
+You also need to register JmsSerializer and the FosRestBundle
+
+```php
+    $bundles = array(
+        ...
+        new FOS\RestBundle\FOSRestBundle(),
+        new JMS\SerializerBundle\JMSSerializerBundle($this),
+    );
+````
+
+The bundle makes some changes to the database structure of PowerDNS but they won't affect the default behaviour.
+
+```sh
+
+php app/console doctrine:schema:update --dump-sql -em=<your_entity_manager>
+
+```
+
+will dump the changes to your current schema, please review them and adapt to your needs.
 
 Configuration
 -------------
 
-There is not really much configuration for the bundle so far, the only you can do is to specify the entity manager you want to use for your PowerDNS installation.
+There is not really much configuration for the bundle so far. You can set the entity manager to use with:
 
 ```yaml
 
 sys_eleven_power_dns:
     entity_manager: default
+
+```
+
+Apart from setting the entity manager, you can also specify default values for new SOA records.
+
+```yaml
+
+sys_eleven_power_dns:
+    entity_manager: default
+    soa_defaults:
+            primary: ns.domain.com
+            hostmaster: admin@domain.com
+            default_ttl: 3600
 
 ```
 
@@ -45,22 +78,10 @@ syseleven_power_dns:
 
 ```
 
-The bundle makes some changes to the database structure of PowerDNS but they won't affect the default behaviour.
-
-```sh
-
-php app/console doctrine:schema:update --dump-sql -em=<your_entity_manager>
-
-```
-
-will dump the changes to your current schema, please review them and adapt to your needs.
-
-
 Third Party Bundles
 -------------------
 
-The integrates bundle with the NelmioApiDocBundle and exposes the documentation of the route parameters through its interface if you want to use this feature you have to activate and configure the Bundle. Please refer to the bundles homepage for more information.
-
+The bundle uses the NelmioApiDocBundle to expose the documentation of the route parameters through its interface if you want to use this feature you have to activate and configure the Bundle. Please refer to the bundles homepage for more information.
 Integration with the FosRestBundle, the bundle uses the View components of the FosRestBundle, if you have the FosRestBundle in use please check your configuration.
 
 

@@ -56,3 +56,5 @@ doctrine:
 
 sys_eleven_power_dns:
     entity_manager: default
+    soa_defaults:
+            primary: ns.domain.com

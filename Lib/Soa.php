@@ -84,6 +84,12 @@ class Soa
      */
     protected $default_ttl = 3600;
 
+
+    public function __construct(array $options = array())
+    {
+        $this->fromArray($options);
+    }
+
     /**
      * @param int $default_ttl
      *

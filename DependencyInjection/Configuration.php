@@ -37,6 +37,17 @@ class Configuration implements ConfigurationInterface
         $rootNode->children()
                     ->scalarNode('entity_manager')->defaultValue('default')->end()
                     ->scalarNode('result_wrapper')->defaultValue('\SysEleven\PowerDnsBundle\Lib\ResultWrapper')->end()
+                    ->arrayNode('soa_defaults')
+                                ->children()
+                                    ->scalarNode('hostmaster')->defaultValue(null)->end()
+                                    ->scalarNode('primary')->defaultValue(null)->end()
+                                    ->scalarNode('serial')->defaultValue(0)->end()
+                                    ->scalarNode('expire')->defaultValue(604800)->end()
+                                    ->scalarNode('retry')->defaultValue(3600)->end()
+                                    ->scalarNode('refresh')->defaultValue(10800)->end()
+                                    ->scalarNode('default_ttl')->defaultValue(3600)->end()
+                                ->end()
+                    ->end()
                 ->end();
 
         return $treeBuilder;
