@@ -12,7 +12,7 @@ To install you need to include this bundle in your composer.json:
 ```javascript
     require: {
          ....
-         syseleven/powerdnsbundle: "1.*"
+         "syseleven/powerdnsbundle": "dev-master"
     }
 ```
 Then run `php composer.phar update and activate the Bundle in your kernel and adapt your configuration.
