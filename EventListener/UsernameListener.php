@@ -78,7 +78,7 @@ class UsernameListener implements EventSubscriberInterface
 
             $username = $token->getUsername();
 
-            if(array_key_exists('_username',$_REQUEST) && 0 != strlen($_REQUEST['_username'])) {
+            if($event->getRequest()->get('_username') && 0 != strlen($event->getRequest()->get('_username'))) {
                 $username = $username.' ('.$_REQUEST['_username'].')';
             }
 
