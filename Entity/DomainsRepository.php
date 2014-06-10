@@ -64,7 +64,6 @@ class DomainsRepository extends EntityRepository
         $qb->leftJoin('d.records', 'r');
 
         $allowed = array('id','name','search','type','master','account');
-        $add = $parameters = array();
 
         foreach($filter AS $k => $v) {
             if(!in_array($k, $allowed)) {
