@@ -1,445 +1,131 @@
-## /powerdns/api/domains ##
+## API Documentation ##
 
-### `GET` /powerdns/api/domains.{_format} ###
 
-_Returns a list of domains_
+## Domains ##
 
-#### Requirements ####
+### `GET` /api/domains.json ###
 
-**_format**
-
-  - Description: Output Format
+Returns a list of domains, the list can optionally be filtered by the following parameters
 
 #### Parameters ####
 
-search:
+Name    | Type   | Description
+------- |:-----: | ---
+search  | string | wildcard search in name and the records entity
+name    | string | search for a domain name (exact search)
+account | string | search for an account name (exact match)
+type    | string | search for records of the given type (MASTER, SLAVE, NATIVE, SUPERSLAVE)
+master  | string | searches within the contents of the master field
 
-  * type: string
-  * required: false
+### `POST /api/domains.json ###
 
-name:
-
-  * type: string
-  * required: false
-
-account:
-
-  * type: string
-  * required: false
-
-type:
-
-  * type: string
-  * required: true
-
-master:
-
-  * type: string
-  * required: false
-
-#### Response ####
-
-name:
-
-  * type: string
-
-type:
-
-  * type: string
-
-id:
-
-  * type: integer
-
-master:
-
-  * type: string
-
-notified_serial:
-
-  * type: integer
-
-account:
-
-  * type: string
-
-user:
-
-  * type: string
-
-
-### `POST` /powerdns/api/domains.{_format} ###
-
-_Creates a new domain_
-
-#### Requirements ####
-
-**_format**
-
-  - Type: string
-  - Description: Output Format
+Creates a new domain with the given parameters. Note: when you create a domain a SOA record will be automatically created.
 
 #### Parameters ####
 
-name:
+Name    | Type   | Description
+------- |:-----: | ---
+name    | string | The name of the domain
+type    | enum   | One of [MASTER, SLAVE, NATIVE, SUPERSLAVE]
+master  | string | Name of the master server only applies to SLAVE or SUPERSLAVE
+account | string | Name of the account to use to login to the master
 
-  * type: string
-  * required: true
 
-type:
+### `GET` /api/domains/{id}.json ###
 
-  * type: string
-  * required: true
+Retrieves the details of the given domain. {id} die must be a positive number.
 
-master:
 
-  * type: string
-  * required: false
+### `PUT` /api/domains/{id}.json ###
 
-account:
-
-  * type: string
-  * required: false
-
-#### Response ####
-
-name:
-
-  * type: string
-
-type:
-
-  * type: string
-
-id:
-
-  * type: integer
-
-master:
-
-  * type: string
-
-notified_serial:
-
-  * type: integer
-
-account:
-
-  * type: string
-
-user:
-
-  * type: string
-
-records[]:
-
-  * type: array of objects (Records)
-
-records[][id]:
-
-  * type: integer
-
-records[][name]:
-
-  * type: string
-
-records[][type]:
-
-  * type: string
-
-records[][ttl]:
-
-  * type: integer
-
-records[][prio]:
-
-  * type: integer
-
-records[][change_date]:
-
-  * type: integer
-
-records[][managed]:
-
-  * type: integer
-
-
-### `GET` /powerdns/api/domains/{id}.{_format} ###
-
-_Shows a single domain_
-
-#### Requirements ####
-
-**id**
-
-  - Requirement: \d+
-**_format**
-
-  - Type: string
-  - Description: Output Format
-
-#### Response ####
-
-name:
-
-  * type: string
-
-type:
-
-  * type: string
-
-id:
-
-  * type: integer
-
-master:
-
-  * type: string
-
-notified_serial:
-
-  * type: integer
-
-account:
-
-  * type: string
-
-user:
-
-  * type: string
-
-records[]:
-
-  * type: array of objects (Records)
-
-records[][id]:
-
-  * type: integer
-
-records[][name]:
-
-  * type: string
-
-records[][type]:
-
-  * type: string
-
-records[][ttl]:
-
-  * type: integer
-
-records[][prio]:
-
-  * type: integer
-
-records[][change_date]:
-
-  * type: integer
-
-records[][managed]:
-
-  * type: integer
-
-
-### `PUT` /powerdns/api/domains/{id}.{_format} ###
-
-_Updates the given domain object_
-
-#### Requirements ####
-
-**id**
-
-  - Requirement: \d+
-**_format**
-
-  - Type: string
-  - Description: Output Format
+Updates the domain given by {id} with the given parameters.
 
 #### Parameters ####
 
-name:
-
-  * type: string
-  * required: true
-
-type:
-
-  * type: string
-  * required: true
-
-master:
-
-  * type: string
-  * required: false
-
-account:
-
-  * type: string
-  * required: false
-
-#### Response ####
-
-name:
-
-  * type: string
-
-type:
-
-  * type: string
-
-id:
-
-  * type: integer
-
-master:
-
-  * type: string
-
-notified_serial:
-
-  * type: integer
-
-account:
-
-  * type: string
-
-user:
-
-  * type: string
-
-records[]:
-
-  * type: array of objects (Records)
-
-records[][id]:
-
-  * type: integer
-
-records[][name]:
-
-  * type: string
-
-records[][type]:
-
-  * type: string
-
-records[][ttl]:
-
-  * type: integer
-
-records[][prio]:
-
-  * type: integer
-
-records[][change_date]:
-
-  * type: integer
-
-records[][managed]:
-
-  * type: integer
+Name    | Type   | Description
+------- |:-----: | ---
+name    | string | The name of the domain
+type    | enum   | One of [MASTER, SLAVE, NATIVE, SUPERSLAVE]
+master  | string | Name of the master server, applies only to SLAVE or SUPERSLAVE
+account | string | Name of the account to use to login to the master
 
 
-### `DELETE` /powerdns/api/domains/{id}.{_format} ###
+### `DELETE` /api/domains/{id}.{_format} ###
 
-_deletes the given domain_
+Deletes the domain given by {id} and all records of the domain.
 
-#### Requirements ####
+### `GET` /api/domains/{id}/history.{_format} ###
 
-**id**
+Displays the history of the domain given by {id}.
 
-  - Requirement: \d+
-**_format**
+## SOA Manipulation ##
 
-  - Type: string
-  - Description: Output Format
+### `GET` /api/domain/{domain}/soa.json ###
 
+Retrieves the SOA record of the given domain.
 
-### `GET` /powerdns/api/domains/{id}/history.{_format} ###
+### `POST` /api/domain/{domain}/soa.json ###
 
-_displays the history of the domain records_
-
-#### Requirements ####
-
-**id**
-
-  - Requirement: \d+
-**_format**
-
-  - Type: string
-  - Description: Output Format
+Creates a new SOA record for the given domain.
 
 #### Parameters ####
 
-search:
+Name    | Type   | Description
+------- |:-----: | ---
+primary | string | Name of the primary nameserver
+hostmaster | string | email of the hostmaster
+serial | string | serial number
+refresh | integer | Refresh in seconds
+expire | integer | expire in seconds
+default_ttl | integer | default ttl in seconds
 
-  * type: string
-  * required: false
+### `PUT` /api/domain/{domain}/soa.json ###
 
-domain_id:
+Updates the SOA record of the given domain.
 
-  * type: string
-  * required: false
+#### Parameters ####
 
-user:
+Name    | Type   | Description
+------- |:-----: | ---
+primary | string | Name of the primary nameserver
+hostmaster | string | email of the hostmaster
+serial | string | serial number
+refresh | integer | Refresh in seconds
+expire | integer | expire in seconds
+default_ttl | integer | default ttl in seconds
 
-  * type: string
-  * required: false
+### `DELETE` /api/domain/{domain}/soa.json ###
 
-record_type:
+Deletes the SOA record of the given domain.
 
-  * type: string
-  * required: true
+## Records ##
 
-from:
+### `GET` /api/domain/{domain}/records.json ###
 
-  * type: datetime
-  * required: false
+Retrieves a list of records for the given domain, the list can optionally filtered.
 
-to:
+#### Parameters ####
 
-  * type: datetime
-  * required: false
+### `POST` /api/domain/{domain}/records.json ###
 
-action:
+Creates a new records within the domain given by {domain}.
 
-  * type: string
-  * required: false
+#### Parameters ####
 
-#### Response ####
+### `GET` /api/domain/{domain}/records/{record}.json ###
 
-id:
+Retrieves the details of the record specified by {domain} and {record}
 
-  * type: integer
+### `PUT` /api/domain/{domain}/records/{record}.json ###
 
-action:
+Updates the record specified by {domain} and {record}. Note: you can only update records of domain with type [MASTER, NATIVE].
 
-  * type: string
+#### Parameters ####
 
-record_id:
+### `DELETE` /api/domain/{domain}/records/{record}.json ###
 
-  * type: integer
+Deletes the record specified by {domain} and {record}.
 
-domain_id:
+### `GET` /api/domain/{domain}/records/{record}/history.json ###
 
-  * type: integer
-
-domain_name:
-
-  * type: integer
-
-record_type:
-
-  * type: string
-
-changes:
-
-  * type: array
-
-user:
-
-  * type: string
-
-created:
-
-  * type: DateTime
+Shows the history of the record specified by {domain} and {record}.

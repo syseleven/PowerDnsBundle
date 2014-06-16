@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  *
  *
- *  @author   M. Seifert <m.seifert@syseleven.de>
+ * @author   M. Seifert <m.seifert@syseleven.de>
  * @package SysEleven\PowerDnsBundle\Controller
  */
 namespace SysEleven\PowerDnsBundle\Controller;
