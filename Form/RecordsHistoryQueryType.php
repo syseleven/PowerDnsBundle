@@ -38,7 +38,6 @@ class RecordsHistoryQueryType extends AbstractType
         $builder
             ->add('search','text', array('required' => false))
             ->add('domain_id', 'entity', array('required' => false, 'class' => 'SysElevenPowerDnsBundle:Domains', 'multiple' => true))
-            ->add('domain_id', 'entity', array('required' => false, 'class' => 'SysElevenPowerDnsBundle:Domains', 'multiple' => true))
             ->add('user','text', array('required' => false))
             ->add('record_type','choice', array('choices' => $this->getSupportedTypes(),'multiple' => true))
             ->add('from','datetime',array('required' => false))

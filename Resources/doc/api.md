@@ -1,5 +1,53 @@
 ## API Documentation ##
 
+## Searching ##
+
+### `GET` /api/search.json ###
+
+
+#### Parameters ####
+
+Name    | Type   | Description
+------- |:-----: | ---
+search  | string | wildcard search in name and the records entity
+name    | string | search for a domain name (exact search)
+account | string | search for an account name (exact match)
+type    | string | search for records of the given type (MASTER, SLAVE, NATIVE, SUPERSLAVE)
+master  | string | searches within the contents of the master field
+offset  | integer | Offset to start
+limit   | integer | Limit result
+
+### `GET` /api/records.json ###
+
+Searches within the domains and records entities
+
+#### Parameters ####
+
+Name    | Type   | Description
+------- |:-----: | ---
+id | integer | ID or list of ids of a record
+search | string | Search string
+name | string | searches in content of name field
+content | string | searches in then content field
+type | enum | record type
+domain | integer | domain id or list of domain ids
+
+### `GET` /api/history.json ###
+
+Searches within the domains and records entities
+
+#### Parameters ####
+
+Name    | Type   | Description
+------- |:-----: | ---
+search  | string | Search string
+domain_id | integer | ID of a domain
+user | string | username
+record_type | string | type of the record
+from | date | Date to start iso date
+to | date | Date to end
+action | string | one of CREATE, UPDATE, DELETE
+
 
 ## Domains ##
 
