@@ -13,6 +13,7 @@
 namespace SysEleven\PowerDnsBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr;
 use SysEleven\PowerDnsBundle\Form\Transformer\PtrTransformer;
 
 /**
