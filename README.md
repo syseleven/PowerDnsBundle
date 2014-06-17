@@ -89,5 +89,5 @@ Integration with the FosRestBundle, the bundle uses the View components of the F
 API Documentation
 -----------------
 
-You can find a documentation of the resources and its parameter here.
+[You can find a documentation of the resources and its parameter here.](Resources/doc/api.md)
 
