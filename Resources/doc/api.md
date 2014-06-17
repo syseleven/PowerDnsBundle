@@ -106,11 +106,32 @@ Retrieves a list of records for the given domain, the list can optionally filter
 
 #### Parameters ####
 
+Name    | Type   | Description
+------- |:-----: | ---
+id | integer | ID or list of ids of a record
+search | string | Search string
+name | string | searches in content of name field
+content | string | searches in then content field
+type | enum | record type
+domain | integer | domain id or list of domain ids
+
+
 ### `POST` /api/domain/{domain}/records.json ###
 
 Creates a new records within the domain given by {domain}.
 
 #### Parameters ####
+
+Name    | Type   | Description
+------- |:-----: | ---
+name | string | name
+type | string | record type
+prio | integer | priority
+ttl | integer | ttl in seconds
+content | string | content field
+force | integer | if 1 validation is completely skipped
+loose_check | integer | if 1 loose validation is enabled on record.
+
 
 ### `GET` /api/domain/{domain}/records/{record}.json ###
 
@@ -121,6 +142,16 @@ Retrieves the details of the record specified by {domain} and {record}
 Updates the record specified by {domain} and {record}. Note: you can only update records of domain with type [MASTER, NATIVE].
 
 #### Parameters ####
+
+Name    | Type   | Description
+------- |:-----: | ---
+name | string | name
+type | string | record type
+prio | integer | priority
+ttl | integer | ttl in seconds
+content | string | content field
+force | integer | if 1 validation is completely skipped
+loose_check | integer | if 1 loose validation is enabled on record.
 
 ### `DELETE` /api/domain/{domain}/records/{record}.json ###
 
