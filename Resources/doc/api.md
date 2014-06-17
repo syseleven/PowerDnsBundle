@@ -65,7 +65,7 @@ account | string | search for an account name (exact match)
 type    | string | search for records of the given type (MASTER, SLAVE, NATIVE, SUPERSLAVE)
 master  | string | searches within the contents of the master field
 
-### `POST /api/domains.json ###
+### `POST` /api/domains.json ###
 
 Creates a new domain with the given parameters. Note: when you create a domain a SOA record will be automatically created.
 
