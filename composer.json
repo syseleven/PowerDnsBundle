@@ -1,3 +1,4 @@
+
 {
     "name": "syseleven/powerdnsbundle",
     "type": "symfony-bundle",
@@ -22,9 +23,7 @@
         "symfony/assetic-bundle":         "~2.3",
         "symfony/swiftmailer-bundle":     "~2.3",
         "symfony/monolog-bundle":         "~2.4",
-        "sensio/distribution-bundle":     "~2.3",
         "sensio/framework-extra-bundle":  "~3.0",
-        "sensio/generator-bundle":        "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/rest-bundle":    "*",
         "zendframework/zend-validator":   "2.0.*",
