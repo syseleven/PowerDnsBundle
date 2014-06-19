@@ -70,7 +70,7 @@ class RecordsHistory
 
     /**
      * @var int
-     * @ORM\Column(name="domain_name", type="integer", nullable=false)
+     * @ORM\Column(name="domain_name", type="string", length=255, nullable=false)
      * @Serializer\Groups({"compact","full"})
      * @Serializer\Expose
      */
