@@ -224,7 +224,7 @@ class ApiSoaController extends ApiController
             $recordObj = $recordWorkflow->update($recordObj);
             $recordWorkflow->createHistory($recordObj);
 
-            return $this->redirect($this->generateUrl('syseleven_powerdns_api_domains_soa', array('domain' => $domainObj->getId(),'_format' => $request->getRequestFormat())));
+            $data = array('status' => 'success', 'data' => $recordObj);
 
         } catch (NotFoundException $nf) {
             $data = array('status' => 'error', 'errors' => array('domain' => 'Not found'));

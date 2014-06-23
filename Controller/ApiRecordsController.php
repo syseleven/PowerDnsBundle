@@ -304,13 +304,11 @@ class ApiRecordsController extends ApiController
              */
             $recordObj = $recordWorkflow->update($recordObj, array(), $force);
 
-            return $this->redirect($this->generateUrl('syseleven_powerdns_api_domains_records_show', array('domain' => $domainObj->getId(), 'record' => $recordObj->getId(),'_format' => $request->getRequestFormat()), 201));
-
-
+            $data = array('status' => 'success', 'data' => $recordObj);
+            return $this->returnView($data, 200, array(), array('details'));
         } catch (NotFoundException $e) {
             $data = array('status' => 'error', 'errors' => array('id' => 'Not found'));
             return $this->returnView($data, 200);
-
         } catch (ValidationException $ve) {
             $data = array('status' => 'error', 'errors' => Tools::prepareSymfonyErrorArray($ve->getErrors()));
             return $this->returnView($data, 200);
