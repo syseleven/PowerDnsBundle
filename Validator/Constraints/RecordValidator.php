@@ -378,7 +378,7 @@ class RecordValidator extends ConstraintValidator
             // Check the hostname only if necessary
             if (!$record->getLooseCheck()) {
                 // First check if we're in the domain.
-                if (false === strpos($name, '.'.$record->getDomain()->getName())) {
+                if ($name != $record->getDomain()->getName() && strpos($name, '.'.$record->getDomain()->getName()) === false) {
                     $this->context->addViolationAt('name',
                         'Name: '.$name.' is not in domain: '.$record->getDomain()->getName(),
                         array(), null);
