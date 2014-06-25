@@ -82,7 +82,7 @@ class ApiRecordsController extends ApiController
 
             $query = new RecordsQuery();
 
-            $form  = $this->createForm(new RecordsSearchType(), $query);
+            $form  = $this->createForm(new RecordsSearchType(), $query, array('method' => 'GET'));
             $form->handleRequest($request);
 
             $query->setDomain($domainObj);
@@ -426,7 +426,7 @@ class ApiRecordsController extends ApiController
             }
 
             $query = new RecordsHistoryQuery();
-            $form  = $this->createForm(new RecordsHistoryQueryType(), $query);
+            $form  = $this->createForm(new RecordsHistoryQueryType(), $query, array('method' => 'GET'));
             $form->handleRequest($request);
 
             $query->setDomainId(array($domainObj));
