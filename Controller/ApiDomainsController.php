@@ -237,8 +237,7 @@ class ApiDomainsController extends ApiController
 
             $domainObj = $workflow->update($domainObj);
 
-            return $this->redirect($this->generateUrl('syseleven_powerdns_api_domains_show', array('id' => $domainObj->getId(),'_format' => $request->getRequestFormat()), 200));
-
+            $data = array('status' => 'success', 'data' => $domainObj);
 
         } catch (NotFoundException $nf) {
 
