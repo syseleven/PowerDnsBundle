@@ -27,6 +27,25 @@ class ApiRecordsControllerTest extends WebTestCase
 
     public $urlPrefix = '';
 
+
+    public function testSearch()
+    {
+        $client = static::createClient();
+        $client->request('GET', $this->urlPrefix.'/api/records.json',array('domain' => 1));
+
+        $cnt = $client->getResponse()->getContent();
+        $cnt = json_decode($cnt, true);
+
+        $this->assertArrayHasKey('status', $cnt);
+        $this->assertEquals('success',$cnt['status']);
+        $this->assertArrayHasKey('data', $cnt);
+
+        foreach ($cnt['data'] AS $record) {
+            $this->assertArrayHasKey('domain_id', $record);
+            $this->assertEquals(1, $record['domain_id']);
+        }
+    }
+
     public function testIndex()
     {
         $domainID = 1;
