@@ -48,7 +48,7 @@ class RecordsSearchType extends AbstractType
             ->add('name_exact','text', array('required' => false))
             ->add('content','text', array('required' => false))
             ->add('type','choice', array('choices' => array(),'multiple' => true))
-            ->add('domain','entity', array('class' => 'SysElevenPowerDnsBundle:Domains'))
+            ->add('domain','entity', array('class' => 'SysElevenPowerDnsBundle:Domains', 'property' => 'id'))
             ->add('domain_id')
             ->add('managed','checkbox', array('required' => false));
     }
