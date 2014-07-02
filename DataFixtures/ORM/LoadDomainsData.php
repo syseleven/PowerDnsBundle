@@ -100,6 +100,7 @@ class LoadDomainsData implements FixtureInterface, ContainerAwareInterface
             $recordWorkflow->createHistory($soa, 'CREATE');
 
             $ns1 = new Records();
+            $ns1->setName('foo.de');
             $ns1->setContent('ns1.ns.de');
             $ns1->setPrio(10);
             $ns1->setTtl(3600);
@@ -109,6 +110,7 @@ class LoadDomainsData implements FixtureInterface, ContainerAwareInterface
             $recordWorkflow->create($ns1);
 
             $ns2 = new Records();
+            $ns2->setName('foo.de');
             $ns2->setContent('ns2.ns.de');
             $ns2->setPrio(20);
             $ns2->setTtl(3600);
@@ -118,6 +120,7 @@ class LoadDomainsData implements FixtureInterface, ContainerAwareInterface
             $recordWorkflow->create($ns2);
 
             $mx = new Records();
+            $mx->setName('foo.de');
             $mx->setContent('mail.foo.de');
             $mx->setPrio(20);
             $mx->setTtl(3600);
@@ -184,6 +187,7 @@ class LoadDomainsData implements FixtureInterface, ContainerAwareInterface
         $recordWorkflow->createHistory($soa, 'CREATE');
 
         $ns1 = new Records();
+        $ns1->setName('bar.de');
         $ns1->setContent('ns1.ns.de');
         $ns1->setPrio(10);
         $ns1->setTtl(3600);
@@ -193,6 +197,7 @@ class LoadDomainsData implements FixtureInterface, ContainerAwareInterface
         $recordWorkflow->create($ns1);
 
         $ns2 = new Records();
+        $ns2->setName('bar.de');
         $ns2->setContent('ns2.ns.de');
         $ns2->setPrio(20);
         $ns2->setTtl(3600);
@@ -202,6 +207,7 @@ class LoadDomainsData implements FixtureInterface, ContainerAwareInterface
         $recordWorkflow->create($ns2);
 
         $mx = new Records();
+        $mx->setName('bar.de');
         $mx->setContent('mail.bar.de');
         $mx->setPrio(20);
         $mx->setTtl(3600);
@@ -256,6 +262,7 @@ class LoadDomainsData implements FixtureInterface, ContainerAwareInterface
         $recordWorkflow->createHistory($soa, 'CREATE');
 
         $ns1 = new Records();
+        $ns1->setName('foobar.de');
         $ns1->setContent('ns1.ns.de');
         $ns1->setPrio(10);
         $ns1->setTtl(3600);
@@ -265,6 +272,7 @@ class LoadDomainsData implements FixtureInterface, ContainerAwareInterface
         $recordWorkflow->create($ns1);
 
         $ns2 = new Records();
+        $ns2->setName('foobar.de');
         $ns2->setContent('ns2.ns.de');
         $ns2->setPrio(20);
         $ns2->setTtl(3600);
@@ -274,6 +282,7 @@ class LoadDomainsData implements FixtureInterface, ContainerAwareInterface
         $recordWorkflow->create($ns2);
 
         $mx = new Records();
+        $mx->setName('foobar.de');
         $mx->setContent('mail.foobar.de');
         $mx->setPrio(20);
         $mx->setTtl(3600);

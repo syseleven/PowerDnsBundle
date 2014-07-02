@@ -242,8 +242,8 @@ class RecordValidator extends ConstraintValidator
             return false;
         }
 
-        // We can check for more errors here
-        if (0 == strlen($record->getName()) && !in_array($record->getType(), array('MX','NS','TXT','SOA','A','AAAA'))) {
+        // There must always be a value for the name, regardless of bind syntax
+        if (0 == strlen($record->getName())) {
             $this->context->addViolationAt('name',
                 'You must provide a name for type: '.$record->getType(), array(), null);
 
