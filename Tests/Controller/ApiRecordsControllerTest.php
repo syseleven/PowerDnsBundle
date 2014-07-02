@@ -292,6 +292,15 @@ class ApiRecordsControllerTest extends WebTestCase
         $this->assertEquals('error',$cnt['status']);
         $this->assertArrayHasKey('errors', $cnt);
 
+        $data = array('name' => 'www.foo.de',
+                      'type' => 'A',
+                      'content' => '1.2.3.5',
+                      'managed' => 1);
+
+        $client = static::createClient();
+        $client->followRedirects(true);
+        $client->request('PUT', $this->urlPrefix.'/api/domains/1/records/'.$recordID.'.json',$data);
+
         return $recordID;
     }
 
@@ -303,7 +312,7 @@ class ApiRecordsControllerTest extends WebTestCase
      */
     public function testPatch($recordID)
     {
-        $data = array('name' => 'www3.foo.de');
+        $data = array('content' => '1.2.3.6');
 
         $client = static::createClient();
         $client->followRedirects(true);
@@ -316,9 +325,9 @@ class ApiRecordsControllerTest extends WebTestCase
         $this->assertEquals('success',$cnt['status']);
         $this->assertArrayHasKey('data', $cnt);
         $this->assertArrayHasKey('name', $cnt['data']);
-        $this->assertEquals('www3.foo.de',$cnt['data']['name']);
+        $this->assertEquals('www.foo.de',$cnt['data']['name']);
         $this->assertArrayHasKey('content', $cnt['data']);
-        $this->assertEquals('1.2.3.5',$cnt['data']['content']);
+        $this->assertEquals('1.2.3.6',$cnt['data']['content']);
         $this->assertArrayHasKey('managed',$cnt['data']);
         $this->assertEquals(1, $cnt['data']['managed']);
 
@@ -345,7 +354,7 @@ class ApiRecordsControllerTest extends WebTestCase
         $this->assertArrayHasKey('status', $cnt);
         $this->assertEquals('success',$cnt['status']);
         $this->assertArrayHasKey('data', $cnt);
-        $this->assertCount(4 ,$cnt['data']);
+        $this->assertCount(5 ,$cnt['data']);
 
 
 

@@ -366,7 +366,7 @@ class ApiRecordsController extends ApiController
                 throw new NotFoundException('Cannot find record with id: '.$record.' in domain: '.$domain);
             }
 
-            $form = $this->createForm(new RecordsType(), $recordObj, array('method' => 'PUT'));
+            $form = $this->createForm(new RecordsType(), $recordObj, array('method' => 'PATCH'));
             $form->remove('domain');
             $form->submit($request, false);
 
