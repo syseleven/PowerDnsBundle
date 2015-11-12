@@ -167,7 +167,7 @@ class RecordsRepository extends EntityRepository
             if ($k == 'name_exact') {
 
                 if (filter_var($v, FILTER_VALIDATE_IP)) {
-                    $qb->andWhere($qb->expr()->eq('r.name',':name'));
+                    $qb->andWhere($qb->expr()->eq('r.name',':name_exact'));
                     $transformer = new PtrTransformer();
                     $name_transformed = $transformer->transform($v);
                     $qb->setParameter('name_exact', $name_transformed);
@@ -179,7 +179,7 @@ class RecordsRepository extends EntityRepository
                 $or->add($qb->expr()->eq('r.name',':name_exact'));
                 $or->add($qb->expr()->eq($qb->expr()->concat('r.name',$qb->expr()->concat("'.'",'d.name')),':name_exact'));
 
-                $qb->andWhere($or)->setParameter('name_exact', '%'.$v.'%');
+                $qb->andWhere($or)->setParameter('name_exact', $v);
 
                 continue;
             }
