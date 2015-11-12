@@ -15,7 +15,7 @@ namespace SysEleven\PowerDnsBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Defines the base form for a record search
@@ -53,10 +53,7 @@ class RecordsSearchType extends AbstractType
             ->add('managed','checkbox', array('required' => false));
     }
 
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -64,6 +61,7 @@ class RecordsSearchType extends AbstractType
                 'data_class' => 'SysEleven\PowerDnsBundle\Query\RecordsQuery',
             ));
     }
+
 
     /**
      * @return string

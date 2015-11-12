@@ -119,7 +119,7 @@ abstract class WorkflowAbstract implements ContainerAwareInterface
     public function create(PowerDnsObjectInterface $obj, array $options = array(), $force = false)
     {
         $loose = $obj->looseCheck();
-        $groups = ($loose)? array('loose'):array();
+        $groups = ($loose)? ['loose']:null;
 
         /**
          * @type Validator $validator
@@ -155,7 +155,7 @@ abstract class WorkflowAbstract implements ContainerAwareInterface
     public function update(PowerDnsObjectInterface $obj, array $options = array(), $force = false)
     {
         $loose = $obj->looseCheck();
-        $groups = ($loose)? array('loose'):array();
+        $groups = ($loose)? ['loose']:null;
 
         /**
          * @type Validator $validator

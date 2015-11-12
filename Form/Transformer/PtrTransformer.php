@@ -13,7 +13,6 @@
 namespace SysEleven\PowerDnsBundle\Form\Transformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * Takes a given ip and transforms it into a form suitable for a PTR record

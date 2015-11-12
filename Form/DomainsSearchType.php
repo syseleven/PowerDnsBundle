@@ -14,7 +14,7 @@ namespace SysEleven\PowerDnsBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Defines the base form for searching in the domains table
@@ -34,7 +34,7 @@ class DomainsSearchType extends AbstractType
             ->add('master','text', array('required' => false));
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -42,6 +42,7 @@ class DomainsSearchType extends AbstractType
                 'data_class' => 'SysEleven\PowerDnsBundle\Query\DomainsQuery',
             ));
     }
+
 
     public function getName()
     {
