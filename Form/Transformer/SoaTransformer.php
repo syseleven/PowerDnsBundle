@@ -60,7 +60,9 @@ class SoaTransformer implements DataTransformerInterface
 
         if (is_array($value)) {
             $soa = new Soa();
-            $soa->fromArray();
+            $soa->fromArray($value);
+
+            return $soa;
         }
 
 

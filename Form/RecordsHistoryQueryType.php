@@ -13,7 +13,7 @@
 namespace SysEleven\PowerDnsBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
 /**
@@ -46,7 +46,7 @@ class RecordsHistoryQueryType extends AbstractType
          ;
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -54,6 +54,7 @@ class RecordsHistoryQueryType extends AbstractType
                 'data_class' => 'SysEleven\PowerDnsBundle\Query\RecordsHistoryQuery',
             ));
     }
+
 
     public function getName()
     {

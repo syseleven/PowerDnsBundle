@@ -17,7 +17,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use SysEleven\PowerDnsBundle\Entity\Records;
 
 /**
@@ -83,7 +83,7 @@ class RecordsType extends AbstractType
 
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -91,6 +91,7 @@ class RecordsType extends AbstractType
                 'data_class' => 'SysEleven\PowerDnsBundle\Entity\Records',
             ));
     }
+
 
     /**
      * Returns the name of this type.

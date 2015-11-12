@@ -12,8 +12,7 @@
  */
 namespace SysEleven\PowerDnsBundle\Form;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use SysEleven\PowerDnsBundle\Form\Transformer\SoaTransformer;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\AbstractType;
 
 
@@ -51,10 +50,7 @@ class SoaFieldType extends AbstractType
         return 'soa';
     }
 
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -62,5 +58,7 @@ class SoaFieldType extends AbstractType
                 'data_class' => 'SysEleven\PowerDnsBundle\Lib\Soa',
             ));
     }
+
+
 }
  
