@@ -198,7 +198,7 @@ class ApiSearchController extends ApiController
         if (!is_null($limit) && filter_var($limit, FILTER_VALIDATE_INT)) {
             $offset = $request->get('offset',0);
             $qb->setFirstResult(abs(intval($offset)));
-            $qb->setMaxResults(abs($offset));
+            $qb->setMaxResults(abs($limit));
         }
 
         $result = $qb->getQuery()->getResult();
