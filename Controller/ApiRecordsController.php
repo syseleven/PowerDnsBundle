@@ -82,7 +82,7 @@ class ApiRecordsController extends ApiController
 
             $query = new RecordsQuery();
 
-            $form  = $this->createForm(new RecordsSearchType(), $query);
+            $form  = $this->createForm(new RecordsSearchType(), $query, array('method' => 'GET'));
             $form->handleRequest($request);
 
             $query->setDomain($domainObj);
@@ -316,6 +316,85 @@ class ApiRecordsController extends ApiController
     }
 
     /**
+     * Updates the given record with the submitted data.
+     *
+     * @ApiDoc(
+     *      description="Updates the given record",
+     *      input="SysEleven\PowerDnsBundle\Form\RecordsType",
+     *      requirements={
+     *          {"name" = "domain", "dataType" = "integer", "requirement" = "\d+", "description" = "Id of the domain"},
+     *          {"name" = "record", "dataType" = "integer", "requirement" = "\d+", "description" = "Id of the record to update"},
+     *          {"name" = "_format", "dataType" = "string", "pattern" = "(json|xml)", "description" = "Output Format"}
+     *      },
+     *
+     *      output={
+     *          "class"="SysEleven\PowerDnsBundle\Entity\Records",
+     *          "groups"="details"
+     *      }
+     * )
+     *
+     * @param Request $request
+     * @param int     $domain
+     * @param int     $record
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @Rest\Patch("/records/{record}.{_format}", name="syseleven_powerdns_api_domains_records_patch")
+     * @throws \SysEleven\PowerDnsBundle\Lib\Exceptions\NotFoundException
+     */
+    public function patchAction(Request $request, $domain, $record)
+    {
+
+        try {
+            /**
+             * @type DomainWorkflow $workflow
+             */
+            $workflow = $this->get('syseleven.pdns.workflow.domains');
+
+            $domainObj = $workflow->get($domain);
+
+            /**
+             * @type RecordWorkflow $recordWorkflow
+             */
+            $recordWorkflow = $this->get('syseleven.pdns.workflow.records');
+
+            /**
+             * @type Records $recordObj
+             */
+            $recordObj = $recordWorkflow->get($record);
+
+            if ($recordObj->getDomain() != $domainObj) {
+                throw new NotFoundException('Cannot find record with id: '.$record.' in domain: '.$domain);
+            }
+
+            $form = $this->createForm(new RecordsType(), $recordObj, array('method' => 'PATCH'));
+            $form->remove('domain');
+            $form->submit($request, false);
+
+            /**
+             * @type RecordWorkflow $recordWorkflow
+             */
+            $recordWorkflow = $this->get('syseleven.pdns.workflow.records');
+
+            $force = $request->get('force',false);
+
+            /**
+             * @type Records $recordObj
+             */
+            $recordObj = $recordWorkflow->update($recordObj, array(), $force);
+
+            $data = array('status' => 'success', 'data' => $recordObj);
+            return $this->returnView($data, 200, array(), array('details'));
+
+        } catch (NotFoundException $e) {
+            $data = array('status' => 'error', 'errors' => array('id' => 'Not found'));
+            return $this->returnView($data, 200);
+        } catch (ValidationException $ve) {
+            $data = array('status' => 'error', 'errors' => Tools::prepareSymfonyErrorArray($ve->getErrors()));
+            return $this->returnView($data, 200);
+        }
+    }
+
+    /**
      * Deletes the record in the backend.
      *
      * @ApiDoc(
@@ -426,7 +505,7 @@ class ApiRecordsController extends ApiController
             }
 
             $query = new RecordsHistoryQuery();
-            $form  = $this->createForm(new RecordsHistoryQueryType(), $query);
+            $form  = $this->createForm(new RecordsHistoryQueryType(), $query, array('method' => 'GET'));
             $form->handleRequest($request);
 
             $query->setDomainId(array($domainObj));
